@@ -54,14 +54,9 @@ graph LR
     Vue.js --> |发送请求/上传数据|Django
     Django --> |返回服务/数据|Cesium
 ```
-
-数据处理
-## 项目实现
-### 前端
-#### 界面
-
 ## 开发环境
-浏览器：Chrome 88+ / Edge 88+ / Firefox 85+
+### 浏览器支持
+Chrome 88+ / Edge 88+ / Firefox 85+
 > 分别是第一个完全不支持 flash player 的版本，助力 flash 死亡，从我做起
 
 
