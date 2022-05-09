@@ -102,3 +102,11 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Local vscode configuration
+.vscode
+
+# Test result
+/test/unit/coverage
+/test/e2e/reports
+/dist/
