@@ -10,7 +10,7 @@
         <Upload/>
         <Analysis/>
       </div>
-      <!--该背景图用于暂时填充-->
+      <!--右侧Cesium框架，背景图用于暂时填充-->
       <div id="cesium-container" 
         :style="{'background-image': 'url(' + require('./assets/logo.png') + ')'}"></div>
     </div>

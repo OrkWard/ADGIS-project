@@ -6,12 +6,6 @@ module.exports = {
   runtimeCompiler: true,
   publicPath:
     process.env.NODE_ENV === "production" ? "/\n" + "vue-cesium-example/" : "/",
-  resolve: {
-    extenstions: ['.js', '.vue', '.json'],
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
-    }
-  },
   configureWebpack: {
     plugins: [
       new CopyWebpackPlugin({
@@ -42,6 +36,12 @@ module.exports = {
       ],
       unknownContextCritical: false,
       unknownContextRegExp: /\/cesium\/cesium\/Source\/Core\/buildModuleUrl\.js/
-    }
+    },
+    resolve: {
+      extensions: ['.js', '.vue', '.json'],
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+      }
+    },
   }
 };
