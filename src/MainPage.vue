@@ -14,8 +14,7 @@
       <div
         id="cesium-container"
         :style="{
-          'background-image':
-            'url(' + require('./assets/image/logo.png') + ')'
+          'background-image': 'url(' + require('./assets/image/logo.png') + ')'
         }"
       ></div>
     </div>

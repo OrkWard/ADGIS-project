@@ -24,17 +24,8 @@ module.exports = {
       })
     ],
     module: {
-      rules: [
-        {
-          test: /\.png$/,
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-          } 
-        }
-      ],
       unknownContextCritical: false,
       unknownContextRegExp: /\/cesium\/cesium\/Source\/Core\/buildModuleUrl\.js/
-    },
+    }
   }
 };
