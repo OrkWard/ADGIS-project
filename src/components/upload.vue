@@ -1,18 +1,12 @@
 <template>
-    <div>
-
-    </div>
+  <div></div>
 </template>
 
 <script>
 export default {
-    name: "Upload",
-    setup() {
-        
-    },
-}
+  name: "Upload",
+  setup() {}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

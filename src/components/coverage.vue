@@ -1,16 +1,12 @@
 <template>
-    <div></div>
+  <div></div>
 </template>
 
 <script>
 export default {
-    name: "Coverage",
-    setup() {
-        
-    },
-}
+  name: "Coverage",
+  setup() {}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

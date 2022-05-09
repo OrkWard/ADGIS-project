@@ -5,14 +5,19 @@
     </nav>
     <div id="main-container">
       <div id="tool-bar">
-        <Assets/>
-        <Coverage/>
-        <Upload/>
-        <Analysis/>
+        <Assets />
+        <Coverage />
+        <Upload />
+        <Analysis />
       </div>
       <!--右侧Cesium框架，背景图用于暂时填充-->
-      <div id="cesium-container" 
-        :style="{'background-image': 'url(' + require('./assets/logo.png') + ')'}"></div>
+      <div
+        id="cesium-container"
+        :style="{
+          'background-image':
+            'url(' + require('./assets/image/logo.png') + ')'
+        }"
+      ></div>
     </div>
   </div>
 </template>
@@ -20,10 +25,10 @@
 <script>
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import * as Cesium from "cesium";
-import Assets from './components/assets.vue'
-import Coverage from './components/coverage.vue';
-import Upload from './components/upload.vue';
-import Analysis from './components/upload.vue'
+import Assets from "./components/assets.vue";
+import Coverage from "./components/coverage.vue";
+import Upload from "./components/upload.vue";
+import Analysis from "./components/upload.vue";
 
 export default {
   name: "MainPage",

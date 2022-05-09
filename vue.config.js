@@ -1,6 +1,5 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const webpack = require("webpack");
-const path = require("path");
 
 module.exports = {
   runtimeCompiler: true,
@@ -22,7 +21,7 @@ module.exports = {
       new webpack.DefinePlugin({
         // Define relative base path in cesium for loading assets
         CESIUM_BASE_URL: JSON.stringify("")
-      }),
+      })
     ],
     module: {
       rules: [
@@ -36,12 +35,6 @@ module.exports = {
       ],
       unknownContextCritical: false,
       unknownContextRegExp: /\/cesium\/cesium\/Source\/Core\/buildModuleUrl\.js/
-    },
-    resolve: {
-      extensions: ['.js', '.vue', '.json'],
-      alias: {
-        '@': path.resolve(__dirname, 'src'),
-      }
     },
   }
 };

@@ -1,13 +1,10 @@
 <template>
-    <div>
-    </div>
+  <div></div>
 </template>
 
 <script>
 export default {
-    name: "Assets",
-    setup() {
-        
-    },
-}
+  name: "Assets",
+  setup() {}
+};
 </script>
