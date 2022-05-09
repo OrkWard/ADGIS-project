@@ -1,14 +1,19 @@
-// vue.config.js
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const webpack = require("webpack");
+const path = require("path");
 
 module.exports = {
   runtimeCompiler: true,
   publicPath:
     process.env.NODE_ENV === "production" ? "/\n" + "vue-cesium-example/" : "/",
+  resolve: {
+    extenstions: ['.js', '.vue', '.json'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    }
+  },
   configureWebpack: {
     plugins: [
-      // Copy Cesium Assets, Widgets, and Workers to a static directory
       new CopyWebpackPlugin({
         patterns: [
           { from: "node_modules/cesium/Build/Cesium/Workers", to: "Workers" },
@@ -23,11 +28,18 @@ module.exports = {
       new webpack.DefinePlugin({
         // Define relative base path in cesium for loading assets
         CESIUM_BASE_URL: JSON.stringify("")
-      })
+      }),
     ],
     module: {
-      // Removes these errors: "Critical dependency: require function is used in a way in which dependencies cannot be statically extracted"
-      // https://github.com/AnalyticalGraphicsInc/cesium-webpack-example/issues/6
+      rules: [
+        {
+          test: /\.png$/,
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+          } 
+        }
+      ],
       unknownContextCritical: false,
       unknownContextRegExp: /\/cesium\/cesium\/Source\/Core\/buildModuleUrl\.js/
     }

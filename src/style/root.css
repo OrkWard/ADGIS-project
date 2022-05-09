@@ -1,0 +1,18 @@
+:root {
+    --main-color: #2541B2;
+    --main-lighter: #06BEE1;
+    --main-darker: #03256C;
+    --main-graier: #1768AC;
+}
+
+* {
+    margin: 0;
+}
+
+body {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
