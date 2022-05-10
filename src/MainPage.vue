@@ -1,7 +1,16 @@
 <template>
   <div id="main-page">
     <nav id="nav-bar">
-      <div>MapEver</div>
+      <div id="tool-list-button" @click="clickBounce">
+        <img id="tool-list-icon" class="animate__animated"
+          src="./assets/image/list.svg"
+          :class="{'animate__bounce': useBounce}"
+          @webkitAnimationEnd="clickBounce"
+        />
+      </div>
+      <div style="display: flex; align-items: center; padding: 0 10px">
+        <div>MapEver</div>
+      </div>
     </nav>
     <div id="main-container">
       <div id="tool-bar">
@@ -35,6 +44,12 @@ export default {
     // 先不去考虑地图
     // this.init();
   },
+  data() {
+    return {
+      toolListButtonWidth: 20,
+      useBounce: false
+    }
+  },
   methods: {
     init() {
       let viewer = new Cesium.Viewer("cesium-container");
@@ -60,6 +75,9 @@ export default {
         },
         duration: 10
       });
+    },
+    clickBounce() {
+      this.useBounce = !this.useBounce;
     }
   },
   components: {
@@ -81,10 +99,34 @@ export default {
 }
 
 #nav-bar {
+  display: flex;
+  flex-flow: row nowrap;
   background-color: var(--main-color);
   color: white;
-  padding: 15px 20px;
   font-size: 20px;
+}
+
+#tool-list-button {
+  padding: 15px;
+  height: 20px;
+  width: 25px;
+  display: flex;
+  cursor: pointer;
+  transition: 300ms;
+}
+#tool-list-button:hover {
+  background-color: var(--main-darker);
+  transition: 300ms;
+}
+#tool-list-button:active {
+  outline: #FFFFFF 1px solid;
+}
+
+#tool-list-icon {
+  filter: var(--white-filter);
+  width: 20px;
+  transition: 300ms;
+  padding: 0;
 }
 
 #main-container {
