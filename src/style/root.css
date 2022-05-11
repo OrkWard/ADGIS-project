@@ -2,8 +2,11 @@
     --main-color: #2541B2;
     --main-lighter: #06BEE1;
     --main-darker: #03256C;
-    --main-graier: #1768AC;
+    --main-gray: #1768AC;
+    --default-gray: #f0f0f0;
+    --default-white: #f8f9fa;
     --white-filter: invert(99%) sepia(93%) saturate(2%) hue-rotate(197deg) brightness(106%) contrast(100%);
+    --main-filter: invert(17%) sepia(62%) saturate(3439%) hue-rotate(225deg) brightness(94%) contrast(95%);
 }
 
 * {

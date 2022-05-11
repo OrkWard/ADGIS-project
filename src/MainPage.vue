@@ -2,9 +2,11 @@
   <div id="main-page">
     <nav id="nav-bar">
       <div id="tool-list-button" @click="clickBounce">
-        <img id="tool-list-icon" class="animate__animated"
+        <img
+          id="tool-list-icon"
+          class="animate__animated"
           src="./assets/image/list.svg"
-          :class="{'animate__bounce': useBounce}"
+          :class="{ animate__bounce: useBounce }"
           @webkitAnimationEnd="clickBounce"
         />
       </div>
@@ -13,11 +15,16 @@
       </div>
     </nav>
     <div id="main-container">
-      <div id="tool-bar">
-        <Assets />
-        <Coverage />
-        <Upload />
-        <Analysis />
+      <div id="tool-bar-container">
+        <div id="tool-bar">
+          <Assets style="width: 100%" />
+          <Coverage />
+          <Upload />
+          <Analysis style="width: 100%" />
+        </div>
+        <div id="scroll-bar"></div>
+      </div>
+      <div id="tool-container">
       </div>
       <!--右侧Cesium框架，背景图用于暂时填充-->
       <div
@@ -48,7 +55,7 @@ export default {
     return {
       toolListButtonWidth: 20,
       useBounce: false
-    }
+    };
   },
   methods: {
     init() {
@@ -119,7 +126,8 @@ export default {
   transition: 300ms;
 }
 #tool-list-button:active {
-  outline: #FFFFFF 1px solid;
+  outline: #ffffff 1px solid;
+  outline-offset: -1px;
 }
 
 #tool-list-icon {
@@ -137,15 +145,33 @@ export default {
 }
 
 #cesium-container {
-  width: 75%;
+  flex: 1 1 0;
   background-repeat: repeat;
   background-position: center;
 }
 
-#tool-bar {
-  width: 25%;
+#tool-bar-container {
+  flex: 0 0 40px;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
+  align-items: center;
+  background-color: var(--default-white);
+}
+
+#tool-container {
+  flex: 0 0 200px;
+  display: flex;
+  border: 2px solid black;
+}
+
+#tool-bar {
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 1 1 0;
+}
+
+#scroll-bar {
+  flex: 0 0 10px;
 }
 </style>
