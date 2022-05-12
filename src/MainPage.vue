@@ -1,7 +1,7 @@
 <template>
   <div id="main-page">
     <nav id="nav-bar">
-      <div id="tool-list-button" @click="clickBounce">
+      <div id="tool-list-button" @click="clickBounce(), toggleTool()">
         <img
           id="tool-list-icon"
           class="animate__animated"
@@ -16,15 +16,18 @@
     </nav>
     <div id="main-container">
       <div id="tool-bar-container">
-        <div id="tool-bar">
+        <div id="tool-icon-container">
+          <icon-button :imgSrc="require('./assets/image/coverage.svg')" />
+          <icon-button :imgSrc="require('./assets/image/file.svg')" />
+          <icon-button :imgSrc="require('./assets/image/upload.svg')" />
+          <hr style="width: 60%;" />
+        </div>
+        <div id="tool-container">
           <Assets style="width: 100%" />
           <Coverage />
           <Upload />
           <Analysis style="width: 100%" />
         </div>
-        <div id="scroll-bar"></div>
-      </div>
-      <div id="tool-container">
       </div>
       <!--右侧Cesium框架，背景图用于暂时填充-->
       <div
@@ -40,20 +43,21 @@
 <script>
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import * as Cesium from "cesium";
+import * as jQuery from "jQuery";
 import Assets from "./components/assets.vue";
 import Coverage from "./components/coverage.vue";
 import Upload from "./components/upload.vue";
 import Analysis from "./components/upload.vue";
+import iconButton from "./components/iconButton.vue";
 
 export default {
   name: "MainPage",
   mounted() {
-    // 先不去考虑地图
-    // this.init();
+    this.init();
   },
   data() {
     return {
-      toolListButtonWidth: 20,
+      toolWidth: "50px",
       useBounce: false
     };
   },
@@ -85,13 +89,20 @@ export default {
     },
     clickBounce() {
       this.useBounce = !this.useBounce;
+    },
+    toggleTool() {
+      jQuery("#tool-bar-container").animate({
+        "flex-basis": (this.toolWidth =
+          this.toolWidth == "50px" ? "300px" : "50px")
+      });
     }
   },
   components: {
     Assets,
     Coverage,
     Upload,
-    Analysis
+    Analysis,
+    iconButton
   }
 };
 </script>
@@ -150,28 +161,34 @@ export default {
   background-position: center;
 }
 
-#tool-bar-container {
-  flex: 0 0 40px;
+#tool-icon-container {
+  flex: 0 0 50px;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
+  border-right: 1px solid var(--default-gray);
+}
+
+#tool-bar-container {
+  flex: 0 0 50px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  overflow: hidden;
   background-color: var(--default-white);
 }
 
 #tool-container {
   flex: 0 0 200px;
   display: flex;
-  border: 2px solid black;
+  flex-flow: column nowrap;
+  transition: 0.5s, flex-basis, ease;
 }
 
 #tool-bar {
   display: flex;
   flex-flow: column nowrap;
   flex: 1 1 0;
-}
-
-#scroll-bar {
-  flex: 0 0 10px;
 }
 </style>

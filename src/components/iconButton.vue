@@ -20,7 +20,7 @@ div {
   transition: 300ms;
 }
 div:hover {
-  background-color: var(--default-gray);
+  background-color: var(--default-background-gray);
   transition: 300ms;
   border-radius: 5px;
   box-shadow: 0px 0px 5px gray;

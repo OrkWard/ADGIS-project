@@ -1,18 +1,12 @@
 <template>
-  <div id="coverage-container">
-    <icon-button :imgSrc="require('../assets/image/coverage.svg')" />
-  </div>
+  <div id="coverage-container"></div>
 </template>
 
 <script>
-import iconButton from "./iconButton.vue";
-
 export default {
   name: "Coverage",
   setup() {},
-  components: {
-    iconButton
-  }
+  components: {}
 };
 </script>
 
