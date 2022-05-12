@@ -1,5 +1,7 @@
 <template>
-  <div id="coverage-container"></div>
+  <div id="coverage-container">
+    图层
+  </div>
 </template>
 
 <script>

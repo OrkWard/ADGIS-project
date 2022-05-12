@@ -7,7 +7,7 @@
           class="animate__animated"
           src="./assets/image/list.svg"
           :class="{ animate__bounce: useBounce }"
-          @webkitAnimationEnd="clickBounce"
+          @AnimationEnd="clickBounce"
         />
       </div>
       <div style="display: flex; align-items: center; padding: 0 10px">
@@ -17,17 +17,18 @@
     <div id="main-container">
       <div id="tool-bar-container">
         <div id="tool-icon-container">
-          <icon-button :imgSrc="require('./assets/image/coverage.svg')" />
-          <icon-button :imgSrc="require('./assets/image/file.svg')" />
-          <icon-button :imgSrc="require('./assets/image/upload.svg')" />
+          <router-link to="/coverage">
+            <icon-button :imgSrc="require('./assets/image/coverage.svg')" />
+          </router-link>
+          <router-link to="/assets">
+            <icon-button :imgSrc="require('./assets/image/file.svg')" />
+          </router-link>
+          <router-link to="/upload">
+            <icon-button :imgSrc="require('./assets/image/upload.svg')" />
+          </router-link>
           <hr style="width: 60%;" />
         </div>
-        <div id="tool-container">
-          <Assets style="width: 100%" />
-          <Coverage />
-          <Upload />
-          <Analysis style="width: 100%" />
-        </div>
+        <router-view id="tool-container"></router-view>
       </div>
       <!--右侧Cesium框架，背景图用于暂时填充-->
       <div
@@ -44,10 +45,6 @@
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import * as Cesium from "cesium";
 import * as jQuery from "jQuery";
-import Assets from "./components/assets.vue";
-import Coverage from "./components/coverage.vue";
-import Upload from "./components/upload.vue";
-import Analysis from "./components/upload.vue";
 import iconButton from "./components/iconButton.vue";
 
 export default {
@@ -57,7 +54,7 @@ export default {
   },
   data() {
     return {
-      toolWidth: "50px",
+      toolWidth: "51px",
       useBounce: false
     };
   },
@@ -93,15 +90,11 @@ export default {
     toggleTool() {
       jQuery("#tool-bar-container").animate({
         "flex-basis": (this.toolWidth =
-          this.toolWidth == "50px" ? "300px" : "50px")
+          this.toolWidth == "51px" ? "300px" : "51px")
       });
     }
   },
   components: {
-    Assets,
-    Coverage,
-    Upload,
-    Analysis,
     iconButton
   }
 };
@@ -125,7 +118,7 @@ export default {
 }
 
 #tool-list-button {
-  padding: 15px;
+  padding: 13px;
   height: 20px;
   width: 25px;
   display: flex;
@@ -171,7 +164,7 @@ export default {
 }
 
 #tool-bar-container {
-  flex: 0 0 50px;
+  flex: 0 0 51px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
