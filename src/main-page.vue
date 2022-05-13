@@ -18,13 +18,13 @@
       <div id="tool-bar-container">
         <div id="tool-icon-container">
           <router-link to="/coverage">
-            <icon-button :imgSrc="require('./assets/image/coverage.svg')" />
+            <icon-button :img-src="require('./assets/image/coverage.svg')" />
           </router-link>
           <router-link to="/assets">
-            <icon-button :imgSrc="require('./assets/image/file.svg')" />
+            <icon-button :img-src="require('./assets/image/file.svg')" />
           </router-link>
           <router-link to="/upload">
-            <icon-button :imgSrc="require('./assets/image/upload.svg')" />
+            <icon-button :img-src="require('./assets/image/upload.svg')" />
           </router-link>
           <hr style="width: 60%;" />
         </div>
@@ -45,7 +45,7 @@
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import * as Cesium from "cesium";
 import * as jQuery from "jQuery";
-import iconButton from "./components/iconButton.vue";
+import iconButton from "./components/icon-button.vue";
 
 export default {
   name: "MainPage",

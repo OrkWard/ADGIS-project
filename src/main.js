@@ -1,5 +1,5 @@
 import Vue from "vue";
-import MainPage from "./MainPage.vue";
+import MainPage from "./main-page.vue";
 import router from "./router";
 import store from "./store";
 import "./style/root.css";

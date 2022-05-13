@@ -1,14 +1,10 @@
 <template>
-  <div id="coverage-container">
-    图层
-  </div>
+  <div id="coverage-container"></div>
 </template>
 
 <script>
 export default {
-  name: "Coverage",
-  setup() {},
-  components: {}
+  name: "Coverage"
 };
 </script>
 
