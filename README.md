@@ -61,26 +61,18 @@ Chrome 88+ / Edge 88+ / Firefox 85+
 ## Build Setup
 
 ``` bash
-# install dependencies
-npm install
+# 安装 yarn
+> yarn 使用多进程，比 npm 更为高效
+npm install -g yarn
 
-# serve with hot reload at localhost:8080
-npm run dev
+# 安装依赖
+yarn install
 
-# build for production with minification
-npm run build
+# 启动和热重载
+yarn serve
 
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+# 快速格式化
+yarn lint
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
