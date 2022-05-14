@@ -1,21 +1,19 @@
 <template>
   <div id="assets-container">
-    <single-asset
-      :format="'geojson'"
-      :name="'hangzhou'"
-      :source="'file'"
-      :type="'vector'"
-    />
+    <asset-container id="image-asset-container" :type="'image'" />
+    <asset-container id="terrain-asset-container" :type="'terrain'" />
+    <asset-container id="vector-asset-container" :type="'vector'" />
+    <asset-container id="entity-asset-container" :type="'entity'" />
   </div>
 </template>
 
 <script>
-import singleAsset from "./single-asset.vue";
+import AssetContainer from "./asset-container.vue";
 
 export default {
   name: "Assets",
   components: {
-    singleAsset
+    AssetContainer
   }
 };
 </script>
@@ -25,5 +23,10 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+}
+
+asset-container {
+  display: flex;
+  flex-flow: column nowrap;
 }
 </style>

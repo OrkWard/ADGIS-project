@@ -60,12 +60,25 @@ export default {
   },
   methods: {
     init() {
-      let viewer = new Cesium.Viewer("cesium-container");
-
+      Cesium.Ion.defaultAccessToken =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxNmZmODFjMS0yMTA5LTQ4ZGQtODY1MS0wZDMzNGUxODk5NWEiLCJpZCI6ODY0NDYsImlhdCI6MTY0NzgzMzEzNn0.Z6RZYH594BXEBh2a5LwKCF7fw5NhlSCRxnibcOz9O8k";
+      let viewer = new Cesium.Viewer("cesium-container", {
+        fullscreenButton: false,
+        homeButton: false,
+        animation: false,
+        timeline: false,
+        vrButton: false
+      });
       let imageryLayers = viewer.imageryLayers;
 
       let googleMap = new Cesium.UrlTemplateImageryProvider({
         url: "http://www.google.com/maps/vt?lyrs=s@716&x={x}&y={y}&z={z}"
+      });
+
+      this.$store.state.commit("addImage", {
+        Provider: googleMap,
+        Name: "google map",
+        format: "url"
       });
 
       imageryLayers.addImageryProvider(googleMap);
