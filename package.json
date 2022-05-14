@@ -13,7 +13,6 @@
     "cesium": "^1.73.0",
     "core-js": "^3.6.5",
     "css-loader": "^6.7.1",
-    "jQuery": "^1.7.4",
     "location": "^0.0.1",
     "navigator": "^1.0.1",
     "vue": "^2.6.12",

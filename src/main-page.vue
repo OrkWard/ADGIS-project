@@ -15,7 +15,7 @@
       </div>
     </nav>
     <div id="main-container">
-      <div id="tool-bar-container">
+      <div id="tool-bar-container" :style="{'flex-basis': toolWidth}">
         <div id="tool-icon-container">
           <router-link to="/coverage">
             <icon-button :img-src="require('./assets/image/coverage.svg')" />
@@ -44,7 +44,6 @@
 <script>
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import * as Cesium from "cesium";
-import * as jQuery from "jQuery";
 import iconButton from "./components/icon-button.vue";
 
 export default {
@@ -114,10 +113,7 @@ export default {
       this.useBounce = !this.useBounce;
     },
     toggleTool() {
-      jQuery("#tool-bar-container").animate({
-        "flex-basis": (this.toolWidth =
-          this.toolWidth == "51px" ? "300px" : "51px")
-      });
+        this.toolWidth = this.toolWidth == "51px" ? "300px" : "51px";
     }
   },
   components: {
@@ -196,6 +192,7 @@ export default {
   justify-content: flex-start;
   overflow: hidden;
   background-color: var(--default-white);
+  transition: 0.5s;
 }
 
 #tool-container {
