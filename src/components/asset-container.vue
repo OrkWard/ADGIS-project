@@ -1,28 +1,114 @@
 <template>
-  <div style="display: flex; flex-flow:column">
-    <single-asset :format="'geojson'" :name="'hangzhou'" :source="'file'" />
+  <div>
+    <div class="asset-type-container" @click="toggleAsset">
+      <img
+        src="../assets/image/arrow.svg"
+        :style="{ transform: 'rotate(' + rotate + 'deg)' }"
+      />
+      <div class="asset-type">{{ type + " data" }}</div>
+    </div>
+    <transition name="single-asset-container">
+      <div v-if="showAsset" class="single-asset-container">
+        <div
+          v-for="(dataSource, index) in dataCollection[type]"
+          :key="index"
+          class="single-asset"
+        >
+          <div class="asset-name">{{ dataSource.Name }}</div>
+          <div class="asset-description">
+            <div class="asset-format">{{ dataSource.Format }}&nbsp;&nbsp;</div>
+            <div class="asset-source">{{ dataSource.Source }}</div>
+          </div>
+        </div>
+      </div>
+    </transition>
+    <div class="asset-split" />
   </div>
 </template>
 
 <script>
-const singleAsset = {
-  props: ["name", "format", "source"],
-  template: `<div style="display: flex; flex-flow:column">
-    <div>{{ name }}</div>
-    <div>{{ format }}</div>
-    <div>{{ source }}</div>
-  </div>`,
-  data() {
-    return {};
-  }
-};
-
 export default {
-  components: {
-    singleAsset
+  props: ["type"],
+  computed: {
+    dataCollection() {
+      return this.$store.state.dataCollection;
+    }
   },
-  props: ["type"]
+  data() {
+    return {
+      showAsset: false,
+      rotate: 0
+    };
+  },
+  methods: {
+    toggleAsset() {
+      this.showAsset = !this.showAsset;
+      this.rotate = this.rotate == 0 ? 90 : 0;
+    }
+  }
 };
 </script>
 
-<style></style>
+<style scoped>
+img {
+  width: 12px;
+  margin-right: 5px;
+  filter: var(--white-filter);
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.asset-type-container {
+  padding: 5px;
+  width: fit-content;
+  margin: 5px;
+  display: flex;
+  flex-flow: row nowrap;
+  text-transform: capitalize;
+  border-radius: 5px;
+  background-color: var(--main-color);
+  color: white;
+  cursor: pointer;
+}
+
+.asset-type {
+  margin-right: 5px;
+  pointer-events: none;
+}
+
+.asset-split {
+  width: calc(100% - 10px);
+  margin: 5px 5px 0;
+  border-top: 1px solid var(--default-gray);
+}
+
+.single-asset-container {
+  margin-left: 5px;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.single-asset {
+  padding: 5px;
+  margin-top: 1px;
+  margin-right: 5px;
+  background-color: var(--main-lighter);
+  color: white;
+  border-radius: 5px;
+}
+
+.asset-description {
+  display: flex;
+  flex-flow: row nowrap;
+  font-size: small;
+}
+
+.single-asset-container-enter-active,
+.single-asset-container-leave-active {
+  transition: opacity 0.5s;
+}
+.single-asset-container-enter,
+.single-asset-container-leave-to {
+  opacity: 0;
+}
+</style>

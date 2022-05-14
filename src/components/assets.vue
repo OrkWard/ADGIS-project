@@ -28,5 +28,6 @@ export default {
 asset-container {
   display: flex;
   flex-flow: column nowrap;
+  width: 100%;
 }
 </style>

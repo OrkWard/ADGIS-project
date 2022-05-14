@@ -74,11 +74,24 @@ export default {
       let googleMap = new Cesium.UrlTemplateImageryProvider({
         url: "http://www.google.com/maps/vt?lyrs=s@716&x={x}&y={y}&z={z}"
       });
+      let osm = new Cesium.OpenStreetMapImageryProvider({
+        url: "https://a.tile.openstreetmap.org/",
+        minimumLevel: 0,
+        maximumLevel: 18,
+        fileExtension: "png"
+      });
 
-      this.$store.state.commit("addImage", {
+      this.$store.commit("addImage", {
         Provider: googleMap,
         Name: "google map",
-        format: "url"
+        Format: "url",
+        Source: "Provided"
+      });
+      this.$store.commit("addImage", {
+        Provider: osm,
+        Name: "OpenStreetMap",
+        Format: "url",
+        Source: "Provided"
       });
 
       imageryLayers.addImageryProvider(googleMap);
@@ -186,7 +199,7 @@ export default {
 }
 
 #tool-container {
-  flex: 0 0 200px;
+  flex: 0 0 249px;
   display: flex;
   flex-flow: column nowrap;
   transition: 0.5s, flex-basis, ease;
