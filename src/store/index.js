@@ -3,6 +3,7 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+// 全局管理各类资源和添加、删除方法
 export default new Vuex.Store({
   state() {
     return {

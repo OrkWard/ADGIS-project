@@ -1,4 +1,5 @@
 <template>
+  <!--资源管理模块-->
   <div id="assets-container">
     <asset-container id="image-asset-container" :type="'image'" />
     <asset-container id="terrain-asset-container" :type="'terrain'" />

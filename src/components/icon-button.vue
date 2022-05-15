@@ -1,4 +1,5 @@
 <template>
+  <!--侧栏按钮-->
   <div>
     <img :src="imgSrc" />
   </div>

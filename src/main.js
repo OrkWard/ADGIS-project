@@ -11,5 +11,5 @@ new Vue({
   router,
   store,
   components: { MainPage },
-  template: "<MainPage/>"
+  template: "<main-page/>"
 }).$mount("#app");

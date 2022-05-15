@@ -1,5 +1,7 @@
 <template>
+  <!--资源类别容器-->
   <div>
+    <!--类别名容器-->
     <div class="asset-type-container" @click="toggleAsset">
       <img
         src="../assets/image/arrow.svg"
@@ -7,7 +9,9 @@
       />
       <div class="asset-type">{{ type + " data" }}</div>
     </div>
+    <!--资源容器-->
     <transition name="single-asset-container">
+      <!--使用迭代生成标签，资源存储在全局store中-->
       <div v-if="showAsset" class="single-asset-container">
         <div
           v-for="(dataSource, index) in dataCollection[type]"
@@ -55,7 +59,7 @@ img {
   margin-right: 5px;
   filter: var(--white-filter);
   pointer-events: none;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 
 .asset-type-container {
@@ -105,7 +109,7 @@ img {
 
 .single-asset-container-enter-active,
 .single-asset-container-leave-active {
-  transition: opacity 0.5s;
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .single-asset-container-enter,
 .single-asset-container-leave-to {

@@ -1,6 +1,8 @@
 <template>
   <div id="main-page">
+    <!--导航栏-->
     <nav id="nav-bar">
+      <!--侧栏按钮-->
       <div id="tool-list-button" @click="clickBounce(), toggleTool()">
         <img
           id="tool-list-icon"
@@ -10,13 +12,18 @@
           @AnimationEnd="clickBounce"
         />
       </div>
+      <!--Logo-->
       <div style="display: flex; align-items: center; padding: 0 10px">
         <div>MapEver</div>
       </div>
     </nav>
+    <!--页面容器-->
     <div id="main-container">
-      <div id="tool-bar-container" :style="{'flex-basis': toolWidth}">
+      <!--模块容器-->
+      <div id="tool-bar-container" :style="{ 'flex-basis': toolWidth }">
+        <!--模块按钮容器-->
         <div id="tool-icon-container">
+          <!--路由链接按钮-->
           <router-link to="/coverage">
             <icon-button :img-src="require('./assets/image/coverage.svg')" />
           </router-link>
@@ -28,6 +35,7 @@
           </router-link>
           <hr style="width: 60%;" />
         </div>
+        <!--模块内容容器-->
         <router-view id="tool-container"></router-view>
       </div>
       <!--右侧Cesium框架，背景图用于暂时填充-->
@@ -53,11 +61,13 @@ export default {
   },
   data() {
     return {
+      // 控制动画
       toolWidth: "51px",
       useBounce: false
     };
   },
   methods: {
+    // 初始化函数，测试用
     init() {
       Cesium.Ion.defaultAccessToken =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxNmZmODFjMS0yMTA5LTQ4ZGQtODY1MS0wZDMzNGUxODk5NWEiLCJpZCI6ODY0NDYsImlhdCI6MTY0NzgzMzEzNn0.Z6RZYH594BXEBh2a5LwKCF7fw5NhlSCRxnibcOz9O8k";
@@ -109,11 +119,13 @@ export default {
         duration: 10
       });
     },
+    // 侧栏按钮动画
     clickBounce() {
       this.useBounce = !this.useBounce;
     },
+    // 侧栏开关动画
     toggleTool() {
-        this.toolWidth = this.toolWidth == "51px" ? "300px" : "51px";
+      this.toolWidth = this.toolWidth == "51px" ? "300px" : "51px";
     }
   },
   components: {
