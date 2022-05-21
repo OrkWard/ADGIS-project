@@ -33,6 +33,9 @@
           <router-link to="/upload">
             <icon-button :img-src="require('./assets/image/upload.svg')" />
           </router-link>
+          <router-link to="/analysis">
+            <icon-button :img-src="require('./assets/image/analysis.svg')" />
+          </router-link>
           <hr style="width: 60%;" />
         </div>
         <!--模块内容容器-->
