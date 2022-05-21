@@ -5,6 +5,7 @@
     --main-darker: #03256C;
     --main-gray: #1768AC;
     --default-background-gray: #ececec;
+    --default-lightgray: #d3d3d3;
     --default-gray: #9a9a9a;
     --default-white: #f8f9fa;
     --white-filter: invert(99%) sepia(93%) saturate(2%) hue-rotate(197deg) brightness(106%) contrast(100%);
