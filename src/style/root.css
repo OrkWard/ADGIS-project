@@ -5,11 +5,12 @@
     --main-darker: #03256C;
     --main-gray: #1768AC;
     --default-background-gray: #ececec;
-    --default-lightgray: #d3d3d3;
+    --default-light-gray: #d3d3d3;
     --default-gray: #9a9a9a;
     --default-white: #f8f9fa;
     --white-filter: invert(99%) sepia(93%) saturate(2%) hue-rotate(197deg) brightness(106%) contrast(100%);
     --main-filter: invert(17%) sepia(62%) saturate(3439%) hue-rotate(225deg) brightness(94%) contrast(95%);
+    --black-filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(239deg) brightness(100%) contrast(100%);
 }
 
 * {
@@ -22,4 +23,5 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
+    user-select: none;
 }

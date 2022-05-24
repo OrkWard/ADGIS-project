@@ -4,7 +4,7 @@
     <!--类别名容器-->
     <div class="asset-type-container" @click="toggleAsset">
       <img
-        src="../assets/image/arrow.svg"
+        src="../../assets/image/arrow.svg"
         :style="{ transform: 'rotate(' + rotate + 'deg)' }"
       />
       <div class="asset-type">{{ type + " data" }}</div>
@@ -13,16 +13,13 @@
     <transition name="single-asset-container">
       <!--使用迭代生成标签，资源存储在全局store中-->
       <div v-if="showAsset" class="single-asset-container">
-        <div
-          v-for="(dataSource, index) in dataCollection[type]"
-          :key="index"
-          class="single-asset"
-        >
-          <div class="asset-name">{{ dataSource.Name }}</div>
-          <div class="asset-description">
-            <div class="asset-format">{{ dataSource.Format }}&nbsp;&nbsp;</div>
-            <div class="asset-source">{{ dataSource.Source }}</div>
-          </div>
+        <div v-for="(dataSource, index) in dataCollection[type]" :key="index">
+          <div class="asset-between" />
+          <single-asset
+            :dataSource="dataSource"
+            :index="index"
+            class="single-asset"
+          />
         </div>
       </div>
     </transition>
@@ -31,6 +28,8 @@
 </template>
 
 <script>
+import singleAsset from "./single-asset.vue";
+
 export default {
   props: ["type"],
   computed: {
@@ -49,6 +48,9 @@ export default {
       this.showAsset = !this.showAsset;
       this.rotate = this.rotate == 0 ? 90 : 0;
     }
+  },
+  components: {
+    singleAsset
   }
 };
 </script>
@@ -57,9 +59,9 @@ export default {
 img {
   width: 12px;
   margin-right: 5px;
-  filter: var(--white-filter);
   pointer-events: none;
   transition: 0.3s;
+  filter: var(--black-filter);
 }
 
 .asset-type-container {
@@ -70,9 +72,10 @@ img {
   flex-flow: row nowrap;
   text-transform: capitalize;
   border-radius: 5px;
-  background-color: var(--main-color);
-  color: white;
   cursor: pointer;
+}
+.asset-type-container:hover {
+  background-color: var(--default-light-gray);
 }
 
 .asset-type {
@@ -87,24 +90,21 @@ img {
 }
 
 .single-asset-container {
-  margin-left: 5px;
+  margin-left: 10px;
   display: flex;
   flex-flow: column nowrap;
 }
 
 .single-asset {
-  padding: 5px;
   margin-top: 1px;
   margin-right: 5px;
-  background-color: var(--main-lighter);
-  color: white;
-  border-radius: 5px;
+  display: flex;
+  flex-flow: column nowrap;
 }
 
-.asset-description {
-  display: flex;
-  flex-flow: row nowrap;
-  font-size: small;
+.asset-between {
+  border-top: 1px solid;
+  margin: 0 5px;
 }
 
 .single-asset-container-enter-active,

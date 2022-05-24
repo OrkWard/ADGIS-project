@@ -43,7 +43,6 @@ export default {
   flex-flow: column nowrap;
   width: 100%;
   padding: 10px;
-  width: fill-available;
   margin-top: 5px;
   text-transform: capitalize;
   background-color: var(--main-color);

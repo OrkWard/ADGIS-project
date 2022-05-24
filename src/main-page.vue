@@ -96,13 +96,13 @@ export default {
       this.$store.commit("addImage", {
         Provider: googleMap,
         Name: "google map",
-        Format: "url",
+        Format: "URL",
         Source: "Provided"
       });
       this.$store.commit("addImage", {
         Provider: osm,
         Name: "OpenStreetMap",
-        Format: "url",
+        Format: "URL",
         Source: "Provided"
       });
 
@@ -128,7 +128,7 @@ export default {
     },
     // 侧栏开关动画
     toggleTool() {
-      this.toolWidth = this.toolWidth == "51px" ? "300px" : "51px";
+      this.toolWidth = this.toolWidth == "51px" ? "320px" : "51px";
     }
   },
   components: {
@@ -211,7 +211,7 @@ export default {
 }
 
 #tool-container {
-  flex: 0 0 249px;
+  flex: 0 0 270px;
   display: flex;
   flex-flow: column nowrap;
   transition: 0.5s, flex-basis, ease;

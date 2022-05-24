@@ -25,7 +25,7 @@ export default {
   margin-top: 2px;
   padding: 5px;
   width: 60%;
-  background-color: var(--default-lightgray);
+  background-color: var(--default-light-gray);
   color: black;
   border-radius: 5px;
   cursor: pointer;
