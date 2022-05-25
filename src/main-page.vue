@@ -4,13 +4,8 @@
     <nav id="nav-bar">
       <!--侧栏按钮-->
       <div id="tool-list-button" @click="clickBounce(), toggleTool()">
-        <img
-          id="tool-list-icon"
-          class="animate__animated"
-          src="./assets/image/list.svg"
-          :class="{ animate__bounce: useBounce }"
-          @AnimationEnd="clickBounce"
-        />
+        <img id="tool-list-icon" class="animate__animated" src="./assets/image/list.svg"
+          :class="{ animate__bounce: useBounce }" @AnimationEnd="clickBounce" />
       </div>
       <!--Logo-->
       <div style="display: flex; align-items: center; padding: 0 10px">
@@ -42,12 +37,9 @@
         <router-view id="tool-container"></router-view>
       </div>
       <!--右侧Cesium框架，背景图用于暂时填充-->
-      <div
-        id="cesium-container"
-        :style="{
-          'background-image': 'url(' + require('./assets/image/logo.png') + ')'
-        }"
-      ></div>
+      <div id="cesium-container" :style="{
+        'background-image': 'url(' + require('./assets/image/logo.png') + ')'
+      }"></div>
     </div>
   </div>
 </template>
@@ -65,22 +57,25 @@ export default {
   data() {
     return {
       // 控制动画
-      toolWidth: "51px",
+      toolWidth: "var(--tool-icon-bar-width)",
       useBounce: false
     };
   },
   methods: {
     // 初始化函数，测试用
     init() {
-      Cesium.Ion.defaultAccessToken =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxNmZmODFjMS0yMTA5LTQ4ZGQtODY1MS0wZDMzNGUxODk5NWEiLCJpZCI6ODY0NDYsImlhdCI6MTY0NzgzMzEzNn0.Z6RZYH594BXEBh2a5LwKCF7fw5NhlSCRxnibcOz9O8k";
-      let viewer = new Cesium.Viewer("cesium-container", {
-        fullscreenButton: false,
-        homeButton: false,
-        animation: false,
-        timeline: false,
-        vrButton: false
-      });
+      this.$store.commit(
+        "initializeViewer",
+        new Cesium.Viewer("cesium-container", {
+          fullscreenButton: false,
+          homeButton: false,
+          animation: false,
+          timeline: false,
+          vrButton: false
+        })
+      );
+      let viewer = this.$store.state.viewer;
+      console.log(this.$store.state.viewer);
       let imageryLayers = viewer.imageryLayers;
 
       let googleMap = new Cesium.UrlTemplateImageryProvider({
@@ -108,6 +103,14 @@ export default {
 
       imageryLayers.addImageryProvider(googleMap);
 
+      let vector = new Cesium.GeoJsonDataSource();
+      vector.load("api/data/2/download", {
+        stroke: Cesium.Color.HOTPINK,
+        fill: Cesium.Color.PINK,
+        strokeWidth: 3
+      });
+      viewer.dataSources.add(vector);
+
       viewer.camera.flyTo({
         destination: Cesium.Cartesian3.fromDegrees(
           114.296063,
@@ -128,12 +131,15 @@ export default {
     },
     // 侧栏开关动画
     toggleTool() {
-      this.toolWidth = this.toolWidth == "51px" ? "320px" : "51px";
+      this.toolWidth =
+        this.toolWidth == "var(--tool-icon-bar-width)"
+          ? "calc(var(--tool-bar-width) + var(--tool-icon-bar-width)"
+          : "var(--tool-icon-bar-width)";
     },
     // 点击左侧模块按钮时自动打开侧栏
     showTool() {
-      if (this.toolWidth != "320px")
-        this.toolWidth = "320px";
+      if (this.toolWidth != "calc(var(--tool-bar-width) + var(--tool-icon-bar-width)")
+        this.toolWidth = "calc(var(--tool-bar-width) + var(--tool-icon-bar-width)";
     }
   },
   components: {
@@ -199,7 +205,7 @@ export default {
 }
 
 #tool-icon-container {
-  flex: 0 0 50px;
+  flex: 0 0 var(--tool-icon-bar-width);
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
@@ -208,7 +214,7 @@ export default {
 }
 
 #tool-bar-container {
-  flex: 0 0 51px;
+  flex: 0 0 var(--tool-bar-icon-width);
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
@@ -218,10 +224,10 @@ export default {
 }
 
 #tool-container {
-  flex: 0 0 270px;
+  flex: 0 0 var(--tool-bar-width);
   display: flex;
   flex-flow: column nowrap;
-  transition: 0.5s, flex-basis, ease;
+  transition: 0.5s, ease;
 }
 
 #tool-bar {

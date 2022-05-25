@@ -1,6 +1,6 @@
 <script>
 // eslint-disable-next-line no-unused-vars
-import { metaProperty } from '@babel/types';
+import { metaProperty } from "@babel/types";
 
 export default {
   name: "Coverage",

@@ -1,11 +1,11 @@
 <template>
-  <div>上传/导入</div>
+  <div></div>
 </template>
 
 <script>
 export default {
   name: "Upload",
-  setup() {}
+  methods: {}
 };
 </script>
 

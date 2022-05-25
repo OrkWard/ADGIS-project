@@ -28,15 +28,24 @@
     <transition name="single-asset-manipulation">
       <div v-if="showSingleAsset" class="asset-manipulation-container">
         <div class="asset-manipulate">
-          <img class="asset-manipulate-icon" :src="require('../../assets/image/add.svg')"/>
+          <img
+            class="asset-manipulate-icon"
+            :src="require('../../assets/image/add.svg')"
+          />
           <div class="asset-manipulate-name">添加到图层</div>
         </div>
         <div class="asset-manipulate">
-          <img class="asset-manipulate-icon" :src="require('../../assets/image/delete.svg')"/>
+          <img
+            class="asset-manipulate-icon"
+            :src="require('../../assets/image/delete.svg')"
+          />
           <div class="asset-manipulate-name">删除</div>
         </div>
         <div class="asset-manipulate">
-          <img class="asset-manipulate-icon" :src="require('../../assets/image/download.svg')"/>
+          <img
+            class="asset-manipulate-icon"
+            :src="require('../../assets/image/download.svg')"
+          />
           <div class="asset-manipulate-name">下载</div>
         </div>
       </div>
@@ -110,6 +119,7 @@ export default {
   flex-flow: row nowrap;
   padding: 5px;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .asset-manipulate {
