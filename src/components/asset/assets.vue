@@ -20,12 +20,6 @@ export default {
 </script>
 
 <style scoped>
-#coverage-container {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-}
-
 asset-container {
   display: flex;
   flex-flow: column nowrap;
