@@ -82,8 +82,9 @@ export default {
           vrButton: false
         })
       );
+      let viewer = this.$store.state.viewer;
       console.log(this.$store.state.viewer);
-      let imageryLayers = this.$store.state.viewer.imageryLayers;
+      let imageryLayers = viewer.imageryLayers;
 
       let googleMap = new Cesium.UrlTemplateImageryProvider({
         url: "http://www.google.com/maps/vt?lyrs=s@716&x={x}&y={y}&z={z}"
@@ -110,7 +111,15 @@ export default {
 
       imageryLayers.addImageryProvider(googleMap);
 
-      this.$store.state.viewer.camera.flyTo({
+      let vector = new Cesium.GeoJsonDataSource();
+      vector.load("api/data/2/download", {
+        stroke: Cesium.Color.HOTPINK,
+        fill: Cesium.Color.PINK,
+        strokeWidth: 3
+      });
+      viewer.dataSources.add(vector);
+
+      viewer.camera.flyTo({
         destination: Cesium.Cartesian3.fromDegrees(
           114.296063,
           30.55245,

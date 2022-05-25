@@ -27,5 +27,16 @@ module.exports = {
       unknownContextCritical: false,
       unknownContextRegExp: /\/cesium\/cesium\/Source\/Core\/buildModuleUrl\.js/
     }
+  },
+  devServer: {
+    proxy: {
+      "/api/": {
+        target: "http://127.0.0.1:8000/api",
+        changeOrigin: true,
+        pathRewrite: {
+          "^/api": ""
+        }
+      }
+    }
   }
 };

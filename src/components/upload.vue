@@ -3,13 +3,8 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "Upload",
-  mounted() {
-    axios.get("");
-  },
   methods: {}
 };
 </script>
