@@ -72,6 +72,7 @@ export default {
   methods: {
     // 初始化函数，测试用
     init() {
+      // viewer变量在store里，store的初始化早于所有模块，因此需要先初始化
       this.$store.commit(
         "initializeViewer",
         new Cesium.Viewer("cesium-container", {
@@ -82,10 +83,11 @@ export default {
           vrButton: false
         })
       );
+      // 取出已初始化的变量
       let viewer = this.$store.state.viewer;
-      console.log(this.$store.state.viewer);
       let imageryLayers = viewer.imageryLayers;
 
+      // 添加两条影像数据
       let googleMap = new Cesium.UrlTemplateImageryProvider({
         url: "http://www.google.com/maps/vt?lyrs=s@716&x={x}&y={y}&z={z}"
       });
@@ -96,6 +98,7 @@ export default {
         fileExtension: "png"
       });
 
+      // 添加到变量中用于管理
       this.$store.commit("addImage", {
         Provider: googleMap,
         Name: "google map",
@@ -111,6 +114,9 @@ export default {
 
       imageryLayers.addImageryProvider(googleMap);
 
+      // 获取geojson数据源，前缀经config中代理后转发请求到后端
+      // api/data/ 地址接受post和put请求用于上传和更新数据，get请求获取数据列表
+      // api/data/{id}/download 地址用于直接获取数据文件
       let vector = new Cesium.GeoJsonDataSource();
       vector.load("api/data/2/download", {
         stroke: Cesium.Color.HOTPINK,

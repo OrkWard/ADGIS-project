@@ -26,6 +26,12 @@ export default new Vuex.Store({
     addTerrain(state, terrainDataSource) {
       state.dataCollection.terrain.push(terrainDataSource);
     },
+    addVector(state, vectorDataSource) {
+      state.dataCollection.vector.push(vectorDataSource);
+    },
+    addEntity(state, entityDataSource) {
+      state.dataCollection.entity.push(entityDataSource);
+    },
     initializeViewer(state, newViewer) {
       state.viewer = newViewer;
     }
