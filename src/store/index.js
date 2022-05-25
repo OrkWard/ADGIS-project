@@ -23,13 +23,29 @@ export default new Vuex.Store({
     addImage(state, imageDataSource) {
       state.dataCollection.image.push(imageDataSource);
     },
-    addTerrain(state, terrainDataSource) {
+    addTerrain(state, Provider, Name) {
+      let terrainDataSource = {
+        Provider,
+        Name
+      };
       state.dataCollection.terrain.push(terrainDataSource);
     },
-    addVector(state, vectorDataSource) {
+    addVector(state, dataSource, Name, Format, id) {
+      let vectorDataSource = {
+        dataSource,
+        Name,
+        Format,
+        id
+      };
       state.dataCollection.vector.push(vectorDataSource);
     },
-    addEntity(state, entityDataSource) {
+    addEntity(state, Entity, Name, Format, id) {
+      let entityDataSource = {
+        Entity,
+        Name,
+        Format,
+        id
+      };
       state.dataCollection.entity.push(entityDataSource);
     },
     initializeViewer(state, newViewer) {

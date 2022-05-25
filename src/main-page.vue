@@ -56,6 +56,7 @@
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import * as Cesium from "cesium";
 import iconButton from "./components/icon-button.vue";
+import axios from "axios";
 
 export default {
   name: "MainPage",
@@ -102,28 +103,61 @@ export default {
       this.$store.commit("addImage", {
         Provider: googleMap,
         Name: "google map",
-        Format: "URL",
         Source: "Provided"
       });
       this.$store.commit("addImage", {
         Provider: osm,
         Name: "OpenStreetMap",
-        Format: "URL",
         Source: "Provided"
       });
 
       imageryLayers.addImageryProvider(googleMap);
 
-      // 获取geojson数据源，前缀经config中代理后转发请求到后端
+      // 预加载全部数据源，前缀经config中代理后转发请求到后端
       // api/data/ 地址接受post和put请求用于上传和更新数据，get请求获取数据列表
       // api/data/{id}/download 地址用于直接获取数据文件
-      let vector = new Cesium.GeoJsonDataSource();
-      vector.load("api/data/2/download", {
-        stroke: Cesium.Color.HOTPINK,
-        fill: Cesium.Color.PINK,
-        strokeWidth: 3
-      });
-      viewer.dataSources.add(vector);
+      axios
+        // 获取列表
+        .get("api/data/")
+        .then(response => {
+          response.data.forEach(function(data) {
+            let dataSource;
+            // 分类别处理，先考虑矢量数据和3D数据
+            switch (data["form"]) {
+              case "vector":
+                // 数据格式
+                switch (data["name"].split(".").pop()) {
+                  case "geojson":
+                    dataSource = new Cesium.GeoJsonDataSource();
+                    break;
+                  case "kml":
+                    dataSource = new Cesium.KmlDataSource();
+                    break;
+                  case "topojson":
+                    dataSource = new Cesium.GeoJsonDataSource();
+                    break;
+                }
+                // 加载数据
+                dataSource.load(`api/data/${data["id"]}/download/`, {
+                  stroke: Cesium.Color.HOTPINK,
+                  fill: Cesium.Color.PINK,
+                  strokeWidth: 3
+                });
+                // 填入store
+                this.$store.commit("addVector", {
+                  dataSource: dataSource,
+                  Name: data["name"],
+                  id: data["id"]
+                });
+                break;
+              case "entity":
+                break;
+            }
+          }, this);
+        })
+        .catch(error => {
+          console.log(error);
+        });
 
       viewer.camera.flyTo({
         destination: Cesium.Cartesian3.fromDegrees(
@@ -152,8 +186,12 @@ export default {
     },
     // 点击左侧模块按钮时自动打开侧栏
     showTool() {
-      if (this.toolWidth != "calc(var(--tool-bar-width) + var(--tool-icon-bar-width)")
-        this.toolWidth = "calc(var(--tool-bar-width) + var(--tool-icon-bar-width)";
+      if (
+        this.toolWidth !=
+        "calc(var(--tool-bar-width) + var(--tool-icon-bar-width)"
+      )
+        this.toolWidth =
+          "calc(var(--tool-bar-width) + var(--tool-icon-bar-width)";
     }
   },
   components: {
