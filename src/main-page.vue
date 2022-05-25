@@ -4,8 +4,13 @@
     <nav id="nav-bar">
       <!--侧栏按钮-->
       <div id="tool-list-button" @click="clickBounce(), toggleTool()">
-        <img id="tool-list-icon" class="animate__animated" src="./assets/image/list.svg"
-          :class="{ animate__bounce: useBounce }" @AnimationEnd="clickBounce" />
+        <img
+          id="tool-list-icon"
+          class="animate__animated"
+          src="./assets/image/list.svg"
+          :class="{ animate__bounce: useBounce }"
+          @AnimationEnd="clickBounce"
+        />
       </div>
       <!--Logo-->
       <div style="display: flex; align-items: center; padding: 0 10px">
@@ -37,9 +42,12 @@
         <router-view id="tool-container"></router-view>
       </div>
       <!--右侧Cesium框架，背景图用于暂时填充-->
-      <div id="cesium-container" :style="{
-        'background-image': 'url(' + require('./assets/image/logo.png') + ')'
-      }"></div>
+      <div
+        id="cesium-container"
+        :style="{
+          'background-image': 'url(' + require('./assets/image/logo.png') + ')'
+        }">
+      </div>
     </div>
   </div>
 </template>
