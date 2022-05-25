@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "animate.css": "^4.1.1",
+    "axios": "^0.27.2",
     "cesium": "^1.73.0",
     "core-js": "^3.6.5",
     "css-loader": "^6.7.1",

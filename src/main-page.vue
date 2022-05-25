@@ -65,23 +65,25 @@ export default {
   data() {
     return {
       // 控制动画
-      toolWidth: "51px",
+      toolWidth: "var(--tool-icon-bar-width)",
       useBounce: false
     };
   },
   methods: {
     // 初始化函数，测试用
     init() {
-      Cesium.Ion.defaultAccessToken =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxNmZmODFjMS0yMTA5LTQ4ZGQtODY1MS0wZDMzNGUxODk5NWEiLCJpZCI6ODY0NDYsImlhdCI6MTY0NzgzMzEzNn0.Z6RZYH594BXEBh2a5LwKCF7fw5NhlSCRxnibcOz9O8k";
-      let viewer = new Cesium.Viewer("cesium-container", {
-        fullscreenButton: false,
-        homeButton: false,
-        animation: false,
-        timeline: false,
-        vrButton: false
-      });
-      let imageryLayers = viewer.imageryLayers;
+      this.$store.commit(
+        "initializeViewer",
+        new Cesium.Viewer("cesium-container", {
+          fullscreenButton: false,
+          homeButton: false,
+          animation: false,
+          timeline: false,
+          vrButton: false
+        })
+      );
+      console.log(this.$store.state.viewer);
+      let imageryLayers = this.$store.state.viewer.imageryLayers;
 
       let googleMap = new Cesium.UrlTemplateImageryProvider({
         url: "http://www.google.com/maps/vt?lyrs=s@716&x={x}&y={y}&z={z}"
@@ -108,7 +110,7 @@ export default {
 
       imageryLayers.addImageryProvider(googleMap);
 
-      viewer.camera.flyTo({
+      this.$store.state.viewer.camera.flyTo({
         destination: Cesium.Cartesian3.fromDegrees(
           114.296063,
           30.55245,
@@ -128,7 +130,10 @@ export default {
     },
     // 侧栏开关动画
     toggleTool() {
-      this.toolWidth = this.toolWidth == "51px" ? "320px" : "51px";
+      this.toolWidth =
+        this.toolWidth == "var(--tool-icon-bar-width)"
+          ? "calc(var(--tool-bar-width) + var(--tool-icon-bar-width)"
+          : "var(--tool-icon-bar-width)";
     }
   },
   components: {
@@ -192,7 +197,7 @@ export default {
 }
 
 #tool-icon-container {
-  flex: 0 0 50px;
+  flex: 0 0 var(--tool-icon-bar-width);
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
@@ -201,7 +206,7 @@ export default {
 }
 
 #tool-bar-container {
-  flex: 0 0 51px;
+  flex: 0 0 var(--tool-bar-icon-width);
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
@@ -211,10 +216,10 @@ export default {
 }
 
 #tool-container {
-  flex: 0 0 270px;
+  flex: 0 0 var(--tool-bar-width);
   display: flex;
   flex-flow: column nowrap;
-  transition: 0.5s, flex-basis, ease;
+  transition: 0.5s, ease;
 }
 
 #tool-bar {

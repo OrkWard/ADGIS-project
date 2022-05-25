@@ -11,6 +11,8 @@
     --white-filter: invert(99%) sepia(93%) saturate(2%) hue-rotate(197deg) brightness(106%) contrast(100%);
     --main-filter: invert(17%) sepia(62%) saturate(3439%) hue-rotate(225deg) brightness(94%) contrast(95%);
     --black-filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(239deg) brightness(100%) contrast(100%);
+    --tool-icon-bar-width: 50px;
+    --tool-bar-width: 270px;
 }
 
 * {

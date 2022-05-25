@@ -1,11 +1,16 @@
 <template>
-  <div>上传/导入</div>
+  <div></div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Upload",
-  setup() {}
+  mounted() {
+    axios.get("");
+  },
+  methods: {}
 };
 </script>
 
