@@ -24,16 +24,16 @@
         <!--模块按钮容器-->
         <div id="tool-icon-container">
           <!--路由链接按钮-->
-          <router-link to="/coverage">
+          <router-link to="/coverage" @click.native="showTool()">
             <icon-button :img-src="require('./assets/image/coverage.svg')" />
           </router-link>
-          <router-link to="/assets">
+          <router-link to="/assets" @click.native="showTool()">
             <icon-button :img-src="require('./assets/image/file.svg')" />
           </router-link>
-          <router-link to="/upload">
+          <router-link to="/upload" @click.native="showTool()">
             <icon-button :img-src="require('./assets/image/upload.svg')" />
           </router-link>
-          <router-link to="/analysis">
+          <router-link to="/analysis" @click.native="showTool()">
             <icon-button :img-src="require('./assets/image/analysis.svg')" />
           </router-link>
           <hr style="width: 60%;" />
@@ -149,6 +149,11 @@ export default {
         this.toolWidth == "var(--tool-icon-bar-width)"
           ? "calc(var(--tool-bar-width) + var(--tool-icon-bar-width)"
           : "var(--tool-icon-bar-width)";
+    },
+    // 点击左侧模块按钮时自动打开侧栏
+    showTool() {
+      if (this.toolWidth != "calc(var(--tool-bar-width) + var(--tool-icon-bar-width)")
+        this.toolWidth = "calc(var(--tool-bar-width) + var(--tool-icon-bar-width)";
     }
   },
   components: {
@@ -182,10 +187,12 @@ export default {
   cursor: pointer;
   transition: 300ms;
 }
+
 #tool-list-button:hover {
   background-color: var(--main-darker);
   transition: 300ms;
 }
+
 #tool-list-button:active {
   outline: #ffffff 1px solid;
   outline-offset: -1px;
