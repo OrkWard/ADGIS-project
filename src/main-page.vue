@@ -122,6 +122,7 @@ export default {
         .then(response => {
           response.data.forEach(function(data) {
             let dataSource;
+            let entity;
             // 分类别处理，先考虑矢量数据和3D数据
             switch (data["form"]) {
               case "vector":
@@ -151,6 +152,27 @@ export default {
                 });
                 break;
               case "entity":
+                switch (data["name"].split(".").pop()) {
+                  case "glb":
+                    // 加载数据
+                    entity = new Cesium.Entity({
+                      name: `${data["name"].split(".")[0]}`,
+                      model: {
+                        show: true,
+                        uri: `api/data/${data["id"]}/download`,
+                        scale: 5.0,
+                        maximumScale: 10000,
+                        minimumPixelSize: 128
+                      }
+                    });
+                    break;
+                }
+                // 填入store
+                this.$store.commit("addEntity", {
+                  entity: entity,
+                  Name: data["name"],
+                  id: data["id"]
+                });
                 break;
             }
           }, this);
