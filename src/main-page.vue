@@ -92,8 +92,7 @@ export default {
       );
       // 取出已初始化的变量
       let viewer = this.$store.state.viewer;
-      viewer.terrainProvier = Provided.terrainDatas[0]["Provider"];
-      console.log(viewer);
+      viewer.terrainProvider = Provided.terrainDatas[1]['Provider'];
 
       Provided.imageDatas.forEach(function(image) {
         this.$store.commit("addImage", image);
