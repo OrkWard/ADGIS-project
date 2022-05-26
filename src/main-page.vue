@@ -92,14 +92,14 @@ export default {
       );
       // 取出已初始化的变量
       let viewer = this.$store.state.viewer;
-      viewer.terrainProvider = Provided.terrainDatas[1]['Provider'];
+      // viewer.terrainProvider = Provided.terrainDatas[1]['Provider'];
 
       Provided.imageDatas.forEach(function(image) {
         this.$store.commit("addImage", image);
       }, this);
-      Provided.terrainDatas.forEach(function(terrain) {
-        this.$store.commit("addTerrain", terrain);
-      }, this);
+      // Provided.terrainDatas.forEach(function(terrain) {
+      //   this.$store.commit("addTerrain", terrain);
+      // }, this);
 
       // 预加载全部数据源，前缀经config中代理后转发请求到后端
       // api/data/ 地址接受post和put请求用于上传和更新数据，get请求获取数据列表

@@ -39,20 +39,20 @@ imageDatas.push({
 
 export let terrainDatas = [];
 
-terrainDatas.push({
-  Provider: new Cesium.ArcGISTiledElevationTerrainProvider({
-    url:
-      "https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer"
-  }),
-  Name: "ArcGISTiledTerrain",
-  OnView: true
-});
-terrainDatas.push({
-  Provider: new Cesium.CesiumTerrainProvider({
-    url: Cesium.IonResource.fromAssetId(3956),
-    requestWaterMask: true,
-    requestVertexNormals: true
-  }),
-  Name: "CesiumTerrain",
-  OnView: false
-});
+// terrainDatas.push({
+//   Provider: new Cesium.ArcGISTiledElevationTerrainProvider({
+//     url:
+//       "https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer"
+//   }),
+//   Name: "ArcGISTiledTerrain",
+//   OnView: false
+// });
+// terrainDatas.push({
+//   Provider: new Cesium.CesiumTerrainProvider({
+//     url: Cesium.IonResource.fromAssetId(3956),
+//     requestWaterMask: true,
+//     requestVertexNormals: true
+//   }),
+//   Name: "CesiumTerrain",
+//   OnView: true
+// });
