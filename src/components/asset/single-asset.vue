@@ -27,7 +27,7 @@
     </div>
     <transition name="single-asset-manipulation">
       <div v-if="showSingleAsset" class="asset-manipulation-container">
-        <div class="asset-manipulate">
+        <div class="asset-manipulate" @click="addToViewer">
           <img
             class="asset-manipulate-icon"
             :src="require('../../assets/image/add.svg')"
@@ -59,7 +59,8 @@ export default {
   methods: {
     toggleSingleAsset() {
       this.showSingleAsset = !this.showSingleAsset;
-    }
+    },
+    addToViewer() {}
   },
   data() {
     return {

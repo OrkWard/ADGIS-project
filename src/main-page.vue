@@ -103,12 +103,14 @@ export default {
       this.$store.commit("addImage", {
         Provider: googleMap,
         Name: "google map",
-        Source: "Provided"
+        Source: "Provided",
+        OnView: true
       });
       this.$store.commit("addImage", {
         Provider: osm,
         Name: "OpenStreetMap",
-        Source: "Provided"
+        Source: "Provided",
+        OnView: true
       });
 
       imageryLayers.addImageryProvider(googleMap);
@@ -148,7 +150,8 @@ export default {
                 this.$store.commit("addVector", {
                   dataSource: dataSource,
                   Name: data["name"],
-                  id: data["id"]
+                  id: data["id"],
+                  OnView: false
                 });
                 break;
               case "entity":
@@ -171,7 +174,8 @@ export default {
                 this.$store.commit("addEntity", {
                   entity: entity,
                   Name: data["name"],
-                  id: data["id"]
+                  id: data["id"],
+                  OnView: false
                 });
                 break;
             }
