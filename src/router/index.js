@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Coverage from "../components/coverage.vue";
+import Coverage from "../components/coverage/coverage.vue";
 import Assets from "../components/asset/assets.vue";
 import Upload from "../components/upload/upload.vue";
 import Analysis from "../components/analysis/analysis.vue";
