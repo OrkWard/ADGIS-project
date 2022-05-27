@@ -49,16 +49,18 @@ export default {
             // 添加到store
             .then(response => {
               let dataSource = new Cesium.GeoJsonDataSource();
-              dataSource.load(`api/data/${response.data["id"]}/download/`, {
+              dataSource.load(`api/data/${response.data.id}/download/`, {
                 stroke: Cesium.Color.HOTPINK,
                 fill: Cesium.Color.PINK,
                 strokeWidth: 3
               });
               this.$store.commit("addVector", {
                 dataSource: dataSource,
-                id: response.data["id"],
-                Name: response.data["name"],
-                OnView: false
+                id: response.data.id,
+                Name: response.data.name,
+                OnView: false,
+                Format: response.data.id.split(".").pop(),
+                Source: "处理生成"
               });
             })
             .catch(error => console.log(error));

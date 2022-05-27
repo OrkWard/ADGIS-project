@@ -1,9 +1,10 @@
 <template>
   <div>
+    <!-- 沿用了asset文件里的部分函数 -->
     <div
       :class="{
         'asset-head-open': showSingleAsset,
-        'asset-head-close': !showSingleAsset
+        'asset-head-close': !showSingleAsset,
       }"
       @click.stop="toggleSingleAsset"
     >
@@ -21,32 +22,32 @@
         :src="require('../../assets/image/arrow.svg')"
         :class="{
           'asset-toggle-icon-up': showSingleAsset,
-          'asset-toggle-icon-down': !showSingleAsset
+          'asset-toggle-icon-down': !showSingleAsset,
         }"
       />
     </div>
     <transition name="single-asset-manipulation">
       <div v-if="showSingleAsset" class="asset-manipulation-container">
-        <div class="asset-manipulate" @click="addToViewer">
+        <div class="asset-manipulate">
           <img
             class="asset-manipulate-icon"
-            :src="require('../../assets/image/add.svg')"
+            :src="require('../../assets/image/showCoverage.svg')"
           />
-          <div class="asset-manipulate-name">添加到图层</div>
+          <div class="asset-manipulate-name">显示到图层</div>
         </div>
-        <div class="asset-manipulate" @click="deleteAsset">
+        <div class="asset-manipulate">
           <img
             class="asset-manipulate-icon"
-            :src="require('../../assets/image/delete.svg')"
+            :src="require('../../assets/image/up.svg')"
           />
-          <div class="asset-manipulate-name">删除</div>
+          <div class="asset-manipulate-name">上移图层</div>
         </div>
-        <div class="asset-manipulate" @click="download">
+        <div class="asset-manipulate">
           <img
             class="asset-manipulate-icon"
-            :src="require('../../assets/image/download.svg')"
+            :src="require('../../assets/image/down.svg')"
           />
-          <div class="asset-manipulate-name">下载</div>
+          <div class="asset-manipulate-name">下移图层</div>
         </div>
       </div>
     </transition>
@@ -54,49 +55,18 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
-  props: ["dataSource", "type"],
+  props: ["dataSource", "index"],
   methods: {
     toggleSingleAsset() {
       this.showSingleAsset = !this.showSingleAsset;
     },
-    addToViewer() {
-      this.$store.commit("OnView", {
-        dataSource: this.dataSource,
-        type: this.type
-      });
-    },
-    deleteAsset() {
-      this.$store.commit("removeData", {
-        dataSource: this.dataSource,
-        type: this.type
-      });
-      if (["用户上传", "处理生成"].includes(this.dataSource.Source)) {
-        axios
-          .delete(`api/data/${this.dataSource.id}/`)
-          .then(response => {
-            console.log(response);
-            alert("删除成功！");
-          })
-          .catch(error => console.log(error));
-      }
-    },
-    download() {
-      window.open(`api/data/${this.dataSource.id}/download/`);
-    }
   },
   data() {
     return {
-      showSingleAsset: false
+      showSingleAsset: false,
     };
   },
-  computed: {
-    dataCollection() {
-      return this.$store.state.dataCollection;
-    }
-  }
 };
 </script>
 
@@ -166,12 +136,10 @@ export default {
 .asset-manipulate-name {
   margin-left: 2px;
   font-size: 12px;
-  pointer-events: none;
 }
 
 .asset-manipulate-icon {
   width: 15px;
-  pointer-events: none;
 }
 
 .single-asset-manipulation-enter-active,
