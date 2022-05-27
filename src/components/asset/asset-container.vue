@@ -17,7 +17,7 @@
           <div class="asset-between" />
           <single-asset
             :dataSource="dataSource"
-            :index="index"
+            :type="type"
             class="single-asset"
           />
         </div>

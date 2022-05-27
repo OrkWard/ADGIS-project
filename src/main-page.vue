@@ -135,9 +135,11 @@ export default {
                 // 填入store
                 this.$store.commit("addVector", {
                   dataSource: dataSource,
-                  Name: data["name"],
-                  id: data["id"],
-                  OnView: false
+                  Name: data.name,
+                  id: data.id,
+                  OnView: false,
+                  Source: "用户上传",
+                  Format: data.name.split(".").pop()
                 });
                 break;
               case "entity":
@@ -292,6 +294,7 @@ export default {
   display: flex;
   flex-flow: column nowrap;
   transition: 0.5s, ease;
+  overflow-y: auto;
 }
 
 #tool-bar {

@@ -34,14 +34,14 @@
           />
           <div class="asset-manipulate-name">添加到图层</div>
         </div>
-        <div class="asset-manipulate">
+        <div class="asset-manipulate" @click="deleteAsset">
           <img
             class="asset-manipulate-icon"
             :src="require('../../assets/image/delete.svg')"
           />
           <div class="asset-manipulate-name">删除</div>
         </div>
-        <div class="asset-manipulate">
+        <div class="asset-manipulate" @click="download">
           <img
             class="asset-manipulate-icon"
             :src="require('../../assets/image/download.svg')"
@@ -54,18 +54,48 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  props: ["dataSource", "index"],
+  props: ["dataSource", "type"],
   methods: {
     toggleSingleAsset() {
       this.showSingleAsset = !this.showSingleAsset;
     },
-    addToViewer() {}
+    addToViewer() {
+      this.$store.commit("OnView", {
+        dataSource: this.dataSource,
+        type: this.type
+      });
+    },
+    deleteAsset() {
+      this.$store.commit("removeData", {
+        dataSource: this.dataSource,
+        type: this.type
+      });
+      if (["用户上传", "处理生成"].includes(this.dataSource.Source)) {
+        axios
+          .delete(`api/data/${this.dataSource.id}/`)
+          .then(response => {
+            console.log(response);
+            alert("删除成功！");
+          })
+          .catch(error => console.log(error));
+      }
+    },
+    download() {
+      window.open(`api/data/${this.dataSource.id}/download/`);
+    }
   },
   data() {
     return {
       showSingleAsset: false
     };
+  },
+  computed: {
+    dataCollection() {
+      return this.$store.state.dataCollection;
+    }
   }
 };
 </script>
@@ -136,10 +166,12 @@ export default {
 .asset-manipulate-name {
   margin-left: 2px;
   font-size: 12px;
+  pointer-events: none;
 }
 
 .asset-manipulate-icon {
   width: 15px;
+  pointer-events: none;
 }
 
 .single-asset-manipulation-enter-active,

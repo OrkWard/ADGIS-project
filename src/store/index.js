@@ -34,6 +34,18 @@ export default new Vuex.Store({
     },
     initializeViewer(state, newViewer) {
       state.viewer = newViewer;
+    },
+    removeData(state, targetData) {
+      let index = state.dataCollection[targetData.type].indexOf(
+        targetData.dataSource
+      );
+      state.dataCollection[targetData.type].splice(index, 1);
+    },
+    OnView(state, targetData) {
+      let index = state.dataCollection[targetData.type].indexOf(
+        targetData.dataSource
+      );
+      state.dataCollection[targetData.type][index].OnView = true;
     }
   },
   actions: {},
