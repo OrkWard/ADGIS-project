@@ -3,17 +3,34 @@
     <div class="analysis-tool-style" @click="callTool">
       {{ toolname }}
     </div>
+    <div :id="toolname"></div>
   </div>
 </template>
 
 <script>
+import AnalysisPanel from "./analysis-panel.vue";
+import vue from "vue";
 import axios from "axios";
 import * as Cesium from "cesium";
+
+function createPanel(props) {
+  // console.log()
+  const panelNode = new (vue.extend(AnalysisPanel))({
+    propsData: props
+  }).$mount();
+  panelNode.toolname = props;
+  document.querySelector("#" + props).appendChild(panelNode.$el);
+  // panelNode.remove =()=> {
+  //   document.removeChild(panelNode.$el);
+  //   panelNode.$destroy();//将vue 的实例对象销毁
+  // }
+}
 
 export default {
   props: ["toolname"],
   methods: {
     callTool() {
+      createPanel(this.toolname);
       let request = {};
       switch (this.toolname) {
         case "叠加分析":
