@@ -5,12 +5,12 @@ export default {
   name: "Coverage",
   props: ["type"],
   components: {
-    coverageImage,
+    coverageImage
   },
   computed: {
     dataCollection() {
       return this.$store.state.dataCollection;
-    },
+    }
   },
   data() {
     return {
@@ -21,7 +21,7 @@ export default {
       rotateVector: 0,
       rotateTerrain: 0,
       rotateImage: 0,
-      rotateEntity: 0,
+      rotateEntity: 0
     };
   },
   methods: {
@@ -44,8 +44,8 @@ export default {
     processEntity() {
       this.showEntity = !this.showEntity;
       this.rotateEntity = this.rotateEntity == 0 ? 90 : 0;
-    },
-  },
+    }
+  }
 };
 </script>
 

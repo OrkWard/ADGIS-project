@@ -4,7 +4,7 @@
     <div
       :class="{
         'asset-head-open': showSingleAsset,
-        'asset-head-close': !showSingleAsset,
+        'asset-head-close': !showSingleAsset
       }"
       @click.stop="toggleSingleAsset"
     >
@@ -22,7 +22,7 @@
         :src="require('../../assets/image/arrow.svg')"
         :class="{
           'asset-toggle-icon-up': showSingleAsset,
-          'asset-toggle-icon-down': !showSingleAsset,
+          'asset-toggle-icon-down': !showSingleAsset
         }"
       />
     </div>
@@ -60,13 +60,13 @@ export default {
   methods: {
     toggleSingleAsset() {
       this.showSingleAsset = !this.showSingleAsset;
-    },
+    }
   },
   data() {
     return {
-      showSingleAsset: false,
+      showSingleAsset: false
     };
-  },
+  }
 };
 </script>
 
