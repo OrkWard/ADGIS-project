@@ -17,7 +17,7 @@
           <div class="asset-between" />
           <single-asset
             :dataSource="dataSource"
-            :index="index"
+            :type="type"
             class="single-asset"
           />
         </div>
@@ -35,23 +35,23 @@ export default {
   computed: {
     dataCollection() {
       return this.$store.state.dataCollection;
-    }
+    },
   },
   data() {
     return {
       showAsset: false,
-      rotate: 0
+      rotate: 0,
     };
   },
   methods: {
     toggleAsset() {
       this.showAsset = !this.showAsset;
       this.rotate = this.rotate == 0 ? 90 : 0;
-    }
+    },
   },
   components: {
-    singleAsset
-  }
+    singleAsset,
+  },
 };
 </script>
 
