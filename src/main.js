@@ -6,7 +6,6 @@ import "./style/root.css";
 import "animate.css";
 
 Vue.config.productionTip = false;
-Vue.prototype.$hostname = "http://10.185.22.111:8000/";
 
 new Vue({
   router,

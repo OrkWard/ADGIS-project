@@ -9,37 +9,36 @@
 </template>
 
 <script>
-
-
 export default {
   props: ["toolname"],
-  methods: {
-  },
+  methods: {},
   directives: {
     drag(el) {
       let oDiv = el; //当前元素
-      oDiv.onmousemove = function (e) {
-        if ((Math.abs(e.clientX - oDiv.offsetLeft) < 20 || Math.abs(e.clientX - (oDiv.offsetLeft + oDiv.offsetWidth)) < 20) ||
-          (Math.abs(e.clientY - oDiv.offsetTop) < 20 || Math.abs(e.clientY - (oDiv.offsetTop + oDiv.offsetHeight)) < 20))
+      oDiv.onmousemove = function(e) {
+        if (
+          Math.abs(e.clientX - oDiv.offsetLeft) < 20 ||
+          Math.abs(e.clientX - (oDiv.offsetLeft + oDiv.offsetWidth)) < 20 ||
+          Math.abs(e.clientY - oDiv.offsetTop) < 20 ||
+          Math.abs(e.clientY - (oDiv.offsetTop + oDiv.offsetHeight)) < 20
+        )
           this.style.cursor = "grab";
-        else
-          this.style.cursor = "default";
-      }
-      oDiv.onmousedown = function (e) {
-        if (this.style.cursor == "default")
-          return;
+        else this.style.cursor = "default";
+      };
+      oDiv.onmousedown = function(e) {
+        if (this.style.cursor == "default") return;
         //鼠标按下，计算当前元素距离可视区的距离
         let disX = e.clientX - oDiv.offsetLeft;
         let disY = e.clientY - oDiv.offsetTop;
-        document.onmousemove = function (e) {
+        document.onmousemove = function(e) {
           //计算移动的距离
           let l = e.clientX - disX;
           let t = e.clientY - disY;
           //移动当前元素
           oDiv.style.left = l + "px";
           oDiv.style.top = t + "px";
-        }
-        document.onmouseup = function () {
+        };
+        document.onmouseup = function() {
           document.onmousemove = null;
           document.onmouseup = null;
         };
@@ -82,7 +81,6 @@ export default {
   text-align: center;
   cursor: pointer;
   border-radius: 5px;
-
 }
 
 .analysis-panel-run:hover {
