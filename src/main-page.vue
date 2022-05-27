@@ -36,7 +36,12 @@
           <router-link to="/analysis" @click.native="showTool()">
             <icon-button :img-src="require('./assets/image/analysis.svg')" />
           </router-link>
-          <hr style="width: 60%;" />
+          <div
+            style="border-bottom: 1px solid gray; 
+              box-sizing: border-box; 
+              width: calc(var(--tool-icon-bar-width) - 10px); 
+              padding: 0 5px;"
+          />
         </div>
         <!--模块内容容器-->
         <router-view id="tool-container"></router-view>
@@ -57,6 +62,7 @@ import "cesium/Build/Cesium/Widgets/widgets.css";
 import * as Cesium from "cesium";
 import iconButton from "./components/icon-button.vue";
 import axios from "axios";
+import * as Provided from "./utils/providedAsset.js";
 
 export default {
   name: "MainPage",
@@ -86,32 +92,14 @@ export default {
       );
       // 取出已初始化的变量
       let viewer = this.$store.state.viewer;
-      let imageryLayers = viewer.imageryLayers;
+      // viewer.terrainProvider = Provided.terrainDatas[1]['Provider'];
 
-      // 添加两条影像数据
-      let googleMap = new Cesium.UrlTemplateImageryProvider({
-        url: "http://www.google.com/maps/vt?lyrs=s@716&x={x}&y={y}&z={z}"
-      });
-      let osm = new Cesium.OpenStreetMapImageryProvider({
-        url: "https://a.tile.openstreetmap.org/",
-        minimumLevel: 0,
-        maximumLevel: 18,
-        fileExtension: "png"
-      });
-
-      // 添加到变量中用于管理
-      this.$store.commit("addImage", {
-        Provider: googleMap,
-        Name: "google map",
-        Source: "Provided"
-      });
-      this.$store.commit("addImage", {
-        Provider: osm,
-        Name: "OpenStreetMap",
-        Source: "Provided"
-      });
-
-      imageryLayers.addImageryProvider(googleMap);
+      Provided.imageDatas.forEach(function(image) {
+        this.$store.commit("addImage", image);
+      }, this);
+      // Provided.terrainDatas.forEach(function(terrain) {
+      //   this.$store.commit("addTerrain", terrain);
+      // }, this);
 
       // 预加载全部数据源，前缀经config中代理后转发请求到后端
       // api/data/ 地址接受post和put请求用于上传和更新数据，get请求获取数据列表
@@ -148,7 +136,8 @@ export default {
                 this.$store.commit("addVector", {
                   dataSource: dataSource,
                   Name: data["name"],
-                  id: data["id"]
+                  id: data["id"],
+                  OnView: false
                 });
                 break;
               case "entity":
@@ -171,7 +160,8 @@ export default {
                 this.$store.commit("addEntity", {
                   entity: entity,
                   Name: data["name"],
-                  id: data["id"]
+                  id: data["id"],
+                  OnView: false
                 });
                 break;
             }

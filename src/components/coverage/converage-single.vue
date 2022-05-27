@@ -19,7 +19,7 @@
       </div>
       <img
         class="asset-toggle-icon"
-        :src="require('../assets/image/arrow.svg')"
+        :src="require('../../assets/image/arrow.svg')"
         :class="{
           'asset-toggle-icon-up': showSingleAsset,
           'asset-toggle-icon-down': !showSingleAsset,
@@ -31,23 +31,23 @@
         <div class="asset-manipulate">
           <img
             class="asset-manipulate-icon"
-            :src="require('../assets/image/add.svg')"
+            :src="require('../../assets/image/showCoverage.svg')"
           />
           <div class="asset-manipulate-name">显示到图层</div>
         </div>
         <div class="asset-manipulate">
           <img
             class="asset-manipulate-icon"
-            :src="require('../assets/image/delete.svg')"
+            :src="require('../../assets/image/up.svg')"
           />
-          <div class="asset-manipulate-name">删除</div>
+          <div class="asset-manipulate-name">上移图层</div>
         </div>
         <div class="asset-manipulate">
           <img
             class="asset-manipulate-icon"
-            :src="require('../assets/image/download.svg')"
+            :src="require('../../assets/image/down.svg')"
           />
-          <div class="asset-manipulate-name">下载</div>
+          <div class="asset-manipulate-name">下移图层</div>
         </div>
       </div>
     </transition>

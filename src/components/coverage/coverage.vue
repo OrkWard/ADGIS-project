@@ -1,10 +1,12 @@
 <script>
-// eslint-disable-next-line no-unused-vars
-import { metaProperty } from "@babel/types";
+import coverageSingle from "./converage-single.vue";
 
 export default {
   name: "Coverage",
   props: ["type"],
+  components: {
+    coverageSingle,
+  },
   computed: {
     dataCollection() {
       return this.$store.state.dataCollection;
@@ -16,11 +18,10 @@ export default {
       showTerrain: false,
       showImage: false,
       showEntity: false,
-      rotateVector: 0,
+      rotatyarneVector: 0,
       rotateTerrain: 0,
       rotateImage: 0,
       rotateEntity: 0,
-      showSingleAsset: false,
     };
   },
   methods: {
@@ -33,19 +34,16 @@ export default {
       this.rotateImage = this.rotateImage == 0 ? 90 : 0;
     },
     processVector() {
-      this.showVector != this.showVector;
+      this.showVector = !this.showVector;
       this.rotateVector = this.rotateVector == 0 ? 90 : 0;
     },
     processTerrain() {
-      this.showTerrain != this.showTerrain;
+      this.showTerrain = !this.showTerrain;
       this.rotateTerrain = this.rotateTerrain == 0 ? 90 : 0;
     },
     processEntity() {
-      this.showEntity != this.showEntity;
+      this.showEntity = !this.showEntity;
       this.rotateEntity = this.rotateEntity == 0 ? 90 : 0;
-    },
-    toggleSingleAsset() {
-      this.showSingleAsset = !this.showSingleAsset;
     },
   },
 };
@@ -56,7 +54,7 @@ export default {
     <div class="data-process">
       <div class="coverage-type-container" @click="processImage">
         <img
-          src="../assets/image/arrow.svg"
+          src="../../assets/image/arrow.svg"
           :style="{ transform: 'rotate(' + rotateImage + 'deg)' }"
         />
         <div class="coverage-type">Image Data Coverage</div>
@@ -83,7 +81,7 @@ export default {
     <div class="data-process">
       <div class="coverage-type-container" @click="processTerrain">
         <img
-          src="../assets/image/arrow.svg"
+          src="../../assets/image/arrow.svg"
           :style="{ transform: 'rotate(' + rotateTerrain + 'deg)' }"
         />
         <div class="coverage-type">Terrain Data Coverage</div>
@@ -110,7 +108,7 @@ export default {
     <div class="data-process">
       <div class="coverage-type-container" @click="processVector">
         <img
-          src="../assets/image/arrow.svg"
+          src="../../assets/image/arrow.svg"
           :style="{ transform: 'rotate(' + rotateVector + 'deg)' }"
         />
         <div class="coverage-type">Vector Data Coverage</div>
@@ -137,10 +135,10 @@ export default {
     <div class="data-process">
       <div class="coverage-type-container" @click="processEntity">
         <img
-          src="../assets/image/arrow.svg"
+          src="../../assets/image/arrow.svg"
           :style="{ transform: 'rotate(' + rotateEntity + 'deg)' }"
         />
-        <div class="coverage-type">Vector Data Coverage</div>
+        <div class="coverage-type">Entity Data Coverage</div>
       </div>
       <transition name="coverage-tool-container">
         <div v-if="showEntity">
