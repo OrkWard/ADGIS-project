@@ -1,11 +1,11 @@
 <script>
-import coverageSingle from "./converage-single.vue";
+import coverageImage from "./coverage-image.vue";
 
 export default {
   name: "Coverage",
   props: ["type"],
   components: {
-    coverageSingle,
+    coverageImage,
   },
   computed: {
     dataCollection() {
@@ -18,7 +18,7 @@ export default {
       showTerrain: false,
       showImage: false,
       showEntity: false,
-      rotatyarneVector: 0,
+      rotateVector: 0,
       rotateTerrain: 0,
       rotateImage: 0,
       rotateEntity: 0,
@@ -67,10 +67,10 @@ export default {
               :key="index"
             >
               <div class="coverage-between" />
-              <coverage-single
+              <coverage-image
                 :dataSource="dataSource"
                 :index="index"
-                class="single-coverage"
+                class="coverage-single"
               />
             </div>
           </div>
@@ -94,10 +94,10 @@ export default {
               :key="index"
             >
               <div class="coverage-between" />
-              <coverage-single
+              <coverage-image
                 :dataSource="dataSource"
                 :index="index"
-                class="single-coverage"
+                class="coverage-single"
               />
             </div>
           </div>
@@ -121,10 +121,10 @@ export default {
               :key="index"
             >
               <div class="coverage-between" />
-              <coverage-single
+              <coverage-image
                 :dataSource="dataSource"
                 :index="index"
-                class="single-coverage"
+                class="coverage-single"
               />
             </div>
           </div>
@@ -148,10 +148,10 @@ export default {
               :key="index"
             >
               <div class="coverage-between" />
-              <coverage-single
+              <coverage-image
                 :dataSource="dataSource"
                 :index="index"
-                class="single-coverage"
+                class="coverage-single"
               />
             </div>
           </div>
@@ -182,7 +182,7 @@ export default {
   padding: 0;
 }
 
-.single-coverage {
+.coverage-single {
   margin-top: 1px;
   margin-right: 5px;
   display: flex;

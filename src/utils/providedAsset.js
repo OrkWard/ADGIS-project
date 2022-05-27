@@ -11,7 +11,7 @@ imageDatas.push({
     fileExtension: "png"
   }),
   Name: "google map",
-  Source: "Provided",
+  Source: "预置",
   OnView: true
 });
 
@@ -23,8 +23,9 @@ imageDatas.push({
     fileExtension: "png"
   }),
   Name: "OpenStreetMap",
-  Source: "Provided",
-  OnView: true
+  Source: "预置",
+  OnView: true,
+  Format: "CesiumAsset"
 });
 
 imageDatas.push({
@@ -33,8 +34,9 @@ imageDatas.push({
       "https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer"
   }),
   Name: "ArcGISMap",
-  Source: "Provided",
-  OnView: true
+  Source: "预置",
+  OnView: true,
+  Format: "CesiumAsset"
 });
 
 export let terrainDatas = [];
