@@ -77,8 +77,8 @@ export default {
         ) {
           formData.append("form", "vector");
           this.$message.success("加载矢量数据文件成功！");
-        } else if (ext == "tif" || ext == "tiff") {
-          formData.append("form", "raster");
+        } else if (ext == "tif" || ext == "tiff" || ext == 'zip') {
+          formData.append("form", "image");
           this.$message.success("加载栅格数据文件成功！");
         } else if (ext == "glb" || ext == "gltf") {
           formData.append("form", "entity");
@@ -87,11 +87,10 @@ export default {
           this.$message.warning("请选择正确类型的文件！");
           return;
         }
-        axios({
-          method: "post",
-          url: "api/data/",
-          data: formData
-        });
+        axios
+          .post("api/data/", formData)
+          .then(response => addData(response.data, this))
+          .catch(error => console.log(error));
       }
     }
   }

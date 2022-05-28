@@ -4,7 +4,7 @@
     <div
       :class="{
         'asset-head-open': showSingleAsset,
-        'asset-head-close': !showSingleAsset
+        'asset-head-close': !showSingleAsset,
       }"
       @click.stop="toggleSingleAsset"
     >
@@ -22,18 +22,19 @@
         :src="require('../../assets/image/arrow.svg')"
         :class="{
           'asset-toggle-icon-up': showSingleAsset,
-          'asset-toggle-icon-down': !showSingleAsset
+          'asset-toggle-icon-down': !showSingleAsset,
         }"
       />
     </div>
     <transition name="single-asset-manipulation">
       <div v-if="showSingleAsset" class="asset-manipulation-container">
-        <div class="asset-manipulate">
+        <div class="asset-manipulate" @click="show">
           <img
             class="asset-manipulate-icon"
             :src="require('../../assets/image/showCoverage.svg')"
           />
-          <div class="asset-manipulate-name">显示到图层</div>
+          <div class="asset-manipulate-name" v-if="showIt">显示图层</div>
+          <div class="asset-manipulate-name" v-else>隐藏图层</div>
         </div>
         <div class="asset-manipulate">
           <img
@@ -60,13 +61,17 @@ export default {
   methods: {
     toggleSingleAsset() {
       this.showSingleAsset = !this.showSingleAsset;
-    }
+    },
+    show() {
+      this.showIt = !this.showIt;
+    },
   },
   data() {
     return {
-      showSingleAsset: false
+      showSingleAsset: false,
+      showIt: true,
     };
-  }
+  },
 };
 </script>
 

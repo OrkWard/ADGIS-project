@@ -1,16 +1,20 @@
 <script>
 import coverageImage from "./coverage-image.vue";
+import coverageVector from "./coverage-vector.vue";
+import coverageEntity from "./coverage-entity.vue";
 
 export default {
   name: "Coverage",
   props: ["type"],
   components: {
-    coverageImage
+    coverageImage,
+    coverageVector,
+    coverageEntity,
   },
   computed: {
     dataCollection() {
       return this.$store.state.dataCollection;
-    }
+    },
   },
   data() {
     return {
@@ -21,14 +25,10 @@ export default {
       rotateVector: 0,
       rotateTerrain: 0,
       rotateImage: 0,
-      rotateEntity: 0
+      rotateEntity: 0,
     };
   },
   methods: {
-    // remove用来删除图层
-    remove() {
-      console.log("这里删掉图层");
-    },
     processImage() {
       this.showImage = !this.showImage;
       this.rotateImage = this.rotateImage == 0 ? 90 : 0;
@@ -44,8 +44,8 @@ export default {
     processEntity() {
       this.showEntity = !this.showEntity;
       this.rotateEntity = this.rotateEntity == 0 ? 90 : 0;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -121,7 +121,7 @@ export default {
               :key="index"
             >
               <div class="coverage-between" />
-              <coverage-image
+              <coverage-vector
                 :dataSource="dataSource"
                 :index="index"
                 class="coverage-single"
@@ -148,7 +148,7 @@ export default {
               :key="index"
             >
               <div class="coverage-between" />
-              <coverage-image
+              <coverage-entity
                 :dataSource="dataSource"
                 :index="index"
                 class="coverage-single"

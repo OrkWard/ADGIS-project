@@ -1,9 +1,10 @@
 <template>
   <div>
+    <!-- 沿用了asset文件里的部分函数 -->
     <div
       :class="{
         'asset-head-open': showSingleAsset,
-        'asset-head-close': !showSingleAsset
+        'asset-head-close': !showSingleAsset,
       }"
       @click.stop="toggleSingleAsset"
     >
@@ -21,91 +22,89 @@
         :src="require('../../assets/image/arrow.svg')"
         :class="{
           'asset-toggle-icon-up': showSingleAsset,
-          'asset-toggle-icon-down': !showSingleAsset
+          'asset-toggle-icon-down': !showSingleAsset,
         }"
       />
     </div>
     <transition name="single-asset-manipulation">
       <div v-if="showSingleAsset" class="asset-manipulation-container">
-        <div class="asset-manipulate" @click="addToViewer">
+        <div class="asset-manipulate" @click="show">
+          <!-- 对于四种类型的数据来说，沿用showCoverage这一个图标 -->
           <img
             class="asset-manipulate-icon"
-            :src="require('../../assets/image/add.svg')"
+            :src="require('../../assets/image/showCoverage.svg')"
           />
-          <div class="asset-manipulate-name">添加到图层</div>
+          <div class="asset-manipulate-name" v-if="showIt">显示</div>
+          <div class="asset-manipulate-name" v-else>隐藏</div>
         </div>
-        <div class="asset-manipulate" @click="deleteAsset">
+        <div class="asset-manipulate" @click="symbolization">
           <img
             class="asset-manipulate-icon"
-            :src="require('../../assets/image/delete.svg')"
+            :src="require('../../assets/image/vector.svg')"
           />
-          <div class="asset-manipulate-name">删除</div>
-        </div>
-        <div class="asset-manipulate" @click="download">
-          <img
-            class="asset-manipulate-icon"
-            :src="require('../../assets/image/download.svg')"
-          />
-          <div class="asset-manipulate-name">下载</div>
+          <div class="asset-manipulate-name" v-if="symbol">取消</div>
+          <div class="asset-manipulate-name" v-else>符号化设置</div>
         </div>
       </div>
     </transition>
+    <div v-if="symbol">
+      <coverage-symbol></coverage-symbol>
+    </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-
+// import vue from "vue";
+import coverageSymbol from "./coverage-symbol.vue";
+// function creater(props) {
+//   const symbolNode = new (vue.extend(coverageSymbol))({
+//     propsData: props,
+//   }).$mount();
+//   symbolNode.dataSource = props;
+//   document.querySelector("#" + props).appendChild(symbolNode.$el);
+// }
 export default {
-  props: ["dataSource", "type"],
+  props: ["dataSource", "index"],
+  components: {
+    coverageSymbol,
+  },
   methods: {
     toggleSingleAsset() {
       this.showSingleAsset = !this.showSingleAsset;
     },
-    addToViewer() {
-      this.$store.commit("OnView", {
-        dataSource: this.dataSource,
-        type: this.type
-      });
-      const viewer = this.$store.state.viewer;
-      if (this.type == "image") {
-        viewer.imageryLayers.add(this.dataSource.imageryLayer);
-      } else if (this.type == "vector") {
-        viewer.dataSources.add(this.dataSource.DataSource);
-      }
+    show() {
+      this.showIt = !this.showIt;
     },
-    deleteAsset() {
-      this.$store.commit("removeData", {
-        dataSource: this.dataSource,
-        type: this.type
-      });
-      if (["用户上传", "处理生成"].includes(this.dataSource.Source)) {
-        axios
-          .delete(`api/data/${this.dataSource.id}/`)
-          .then(() => {
-            alert("删除成功！");
-          })
-          .catch(error => console.log(error));
-      }
+    symbolization() {
+      this.symbol = !this.symbol;
+      // creater(this.dataSource);
     },
-    download() {
-      window.open(`api/data/${this.dataSource.id}/download/`);
-    }
   },
   data() {
     return {
-      showSingleAsset: false
+      showSingleAsset: false,
+      showIt: true,
+      symbol: false,
     };
   },
-  computed: {
-    dataCollection() {
-      return this.$store.state.dataCollection;
-    }
-  }
 };
 </script>
 
 <style>
+.box {
+  width: 250px;
+  height: 300px;
+  top: 180px;
+  left: 460px;
+  margin: auto auto;
+  border-radius: 3.5%;
+  background: #f3f5f7;
+  box-shadow: 5px 4px 5px 2px #ddd;
+  color: white;
+  background-position: center center;
+  position: absolute;
+  opacity: 0.8;
+}
 .asset-head-open {
   display: flex;
   padding: 5px;
@@ -171,12 +170,10 @@ export default {
 .asset-manipulate-name {
   margin-left: 2px;
   font-size: 12px;
-  pointer-events: none;
 }
 
 .asset-manipulate-icon {
   width: 15px;
-  pointer-events: none;
 }
 
 .single-asset-manipulation-enter-active,
