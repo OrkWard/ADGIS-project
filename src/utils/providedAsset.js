@@ -19,7 +19,7 @@ imageDatas.push({
 });
 
 imageDatas.push({
-  Provider: new Cesium.ImageryLayer(
+  Layer: new Cesium.ImageryLayer(
     new Cesium.OpenStreetMapImageryProvider({
       url: "https://a.tile.openstreetmap.org/",
       minimumLevel: 0,

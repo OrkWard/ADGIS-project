@@ -26,8 +26,8 @@
   </div>
 </template>
 <script>
-window.onload = function () {
-  document.onmouseup = function () {
+window.onload = function() {
+  document.onmouseup = function() {
     document.onmousemove = null;
   };
 };
@@ -36,12 +36,12 @@ export default {
   methods: {
     symbolIt() {
       alert("应用符号化");
-    },
+    }
   },
   directives: {
     drag(el) {
       let oDiv = el; //当前元素
-      oDiv.onmousemove = function (e) {
+      oDiv.onmousemove = function(e) {
         if (
           Math.abs(e.clientX - oDiv.offsetLeft) < 20 ||
           Math.abs(e.clientX - (oDiv.offsetLeft + oDiv.offsetWidth)) < 20 ||
@@ -51,12 +51,12 @@ export default {
           this.style.cursor = "grab";
         else this.style.cursor = "default";
       };
-      oDiv.onmousedown = function (e) {
+      oDiv.onmousedown = function(e) {
         if (this.style.cursor == "default") return;
         //鼠标按下，计算当前元素距离可视区的距离
         let disX = e.clientX - oDiv.offsetLeft;
         let disY = e.clientY - oDiv.offsetTop;
-        document.onmousemove = function (e) {
+        document.onmousemove = function(e) {
           //计算移动的距离
           let l = e.clientX - disX;
           let t = e.clientY - disY;
@@ -66,8 +66,8 @@ export default {
         };
         return false;
       };
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

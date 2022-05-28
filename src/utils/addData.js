@@ -2,28 +2,32 @@ import axios from "axios";
 import * as Cesium from "cesium";
 
 export default function addData(data, vue_this) {
+  // data: response from api/data/<id>/download/
+  let layer;
   let dataSource;
   // 分类别处理，先考虑矢量数据和3D数据
   switch (data["form"]) {
     case "image":
       axios.put("api/image/publish/", { id: data.id }).then(response => {
-        dataSource = new Cesium.WebMapServiceImageryProvider({
-          url: response.data.url,
-          layers: response.data.layer,
-          parameters: {
-            service: "WMS",
-            format: "image/png",
-            transparent: true
-          }
+        layer = new Cesium.ImageryLayer(
+          new Cesium.WebMapServiceImageryProvider({
+            url: response.data.url,
+            layers: response.data.layer,
+            parameters: {
+              service: "WMS",
+              format: "image/png",
+              transparent: true
+            }
+          })
+        );
+        vue_this.$store.commit("addImage", {
+          Layer: layer,
+          Name: data.name,
+          Source: "用户上传",
+          OnView: false,
+          Format: data.name.split(".").pop(),
+          id: data.id
         });
-      });
-      vue_this.$store.commit("addImage", {
-        DataSource: dataSource,
-        Name: data.name,
-        Source: "用户上传",
-        OnView: false,
-        Format: data.name.split(".").pop(),
-        id: data.id
       });
       break;
     case "vector":

@@ -41,6 +41,7 @@
 
 <script>
 import axios from "axios";
+import addData from "../utils/addData.js";
 
 export default {
   name: "Upload",
@@ -77,7 +78,7 @@ export default {
         ) {
           formData.append("form", "vector");
           this.$message.success("加载矢量数据文件成功！");
-        } else if (ext == "tif" || ext == "tiff" || ext == 'zip') {
+        } else if (ext == "tif" || ext == "tiff" || ext == "zip") {
           formData.append("form", "image");
           this.$message.success("加载栅格数据文件成功！");
         } else if (ext == "glb" || ext == "gltf") {

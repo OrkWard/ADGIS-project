@@ -4,7 +4,7 @@
     <div
       :class="{
         'asset-head-open': showSingleAsset,
-        'asset-head-close': !showSingleAsset,
+        'asset-head-close': !showSingleAsset
       }"
       @click.stop="toggleSingleAsset"
     >
@@ -22,7 +22,7 @@
         :src="require('../../assets/image/arrow.svg')"
         :class="{
           'asset-toggle-icon-up': showSingleAsset,
-          'asset-toggle-icon-down': !showSingleAsset,
+          'asset-toggle-icon-down': !showSingleAsset
         }"
       />
     </div>
@@ -66,7 +66,7 @@ import coverageSymbol from "./coverage-symbol.vue";
 export default {
   props: ["dataSource", "index"],
   components: {
-    coverageSymbol,
+    coverageSymbol
   },
   methods: {
     toggleSingleAsset() {
@@ -78,15 +78,15 @@ export default {
     symbolization() {
       this.symbol = !this.symbol;
       // creater(this.dataSource);
-    },
+    }
   },
   data() {
     return {
       showSingleAsset: false,
       showIt: true,
-      symbol: false,
+      symbol: false
     };
-  },
+  }
 };
 </script>
 

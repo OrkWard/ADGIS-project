@@ -353,6 +353,7 @@ export default {
                   fill: Cesium.Color.PINK,
                   strokeWidth: 3
                 });
+                console.log(this);
                 this.$store.commit("addVector", {
                   dataSource: dataSource,
                   id: response.data.id,
