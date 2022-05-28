@@ -22,7 +22,7 @@ export default new Vuex.Store({
   mutations: {
     addImage(state, imageDataSource) {
       /* imageDataSource: {
-        Provider: Cesium.imageProvider,
+        Layer: Cesium.imageryLayer,
         Name: String,
         Source: String,
         OnView: Boolean,
@@ -43,7 +43,7 @@ export default new Vuex.Store({
     },
     addVector(state, vectorDataSource) {
       /* vectorDataSource: {
-        Provider: Cesium.dataSource,
+        DataSource: Cesium.dataSource,
         Name: String,
         Source: String,
         OnView: Boolean,
@@ -54,7 +54,7 @@ export default new Vuex.Store({
     },
     addEntity(state, entityDataSource) {
       /* entityDataSource: {
-        Provider: Cesium.dataSource,
+        DataSource: Cesium.dataSource,
         Name: String,
         Source: String,
         OnView: Boolean,

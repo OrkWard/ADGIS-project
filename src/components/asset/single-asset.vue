@@ -67,6 +67,12 @@ export default {
         dataSource: this.dataSource,
         type: this.type
       });
+      const viewer = this.$store.state.viewer;
+      if (this.type == "image") {
+        viewer.imageryLayers.add(this.dataSource.imageryLayer);
+      } else if (this.type == "vector") {
+        viewer.dataSources.add(this.dataSource.DataSource);
+      }
     },
     deleteAsset() {
       this.$store.commit("removeData", {
@@ -74,11 +80,9 @@ export default {
         type: this.type
       });
       if (["用户上传", "处理生成"].includes(this.dataSource.Source)) {
-        console.log("here");
         axios
           .delete(`api/data/${this.dataSource.id}/`)
-          .then(response => {
-            console.log(response);
+          .then(() => {
             alert("删除成功！");
           })
           .catch(error => console.log(error));

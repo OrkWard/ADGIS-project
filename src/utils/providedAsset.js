@@ -4,12 +4,14 @@ import * as Cesium from "cesium";
 export let imageDatas = [];
 // 添加两条影像数据
 imageDatas.push({
-  Provider: new Cesium.UrlTemplateImageryProvider({
-    url: "http://www.google.com/maps/vt?lyrs=s@716&x={x}&y={y}&z={z}",
-    minimumLevel: 0,
-    maximumLevel: 18,
-    fileExtension: "png"
-  }),
+  Layer: new Cesium.ImageryLayer(
+    new Cesium.UrlTemplateImageryProvider({
+      url: "http://www.google.com/maps/vt?lyrs=s@716&x={x}&y={y}&z={z}",
+      minimumLevel: 0,
+      maximumLevel: 18,
+      fileExtension: "png"
+    })
+  ),
   Name: "google map",
   Source: "预置",
   OnView: true,
@@ -17,12 +19,14 @@ imageDatas.push({
 });
 
 imageDatas.push({
-  Provider: new Cesium.OpenStreetMapImageryProvider({
-    url: "https://a.tile.openstreetmap.org/",
-    minimumLevel: 0,
-    maximumLevel: 18,
-    fileExtension: "png"
-  }),
+  Provider: new Cesium.ImageryLayer(
+    new Cesium.OpenStreetMapImageryProvider({
+      url: "https://a.tile.openstreetmap.org/",
+      minimumLevel: 0,
+      maximumLevel: 18,
+      fileExtension: "png"
+    })
+  ),
   Name: "OpenStreetMap",
   Source: "预置",
   OnView: true,
@@ -39,12 +43,12 @@ export let terrainDatas = [];
 //   Name: "ArcGISTiledTerrain",
 //   OnView: false
 // });
-// terrainDatas.push({
-//   Provider: new Cesium.CesiumTerrainProvider({
-//     url: Cesium.IonResource.fromAssetId(3956),
-//     requestWaterMask: true,
-//     requestVertexNormals: true
-//   }),
-//   Name: "CesiumTerrain",
-//   OnView: true
-// });
+terrainDatas.push({
+  Provider: new Cesium.CesiumTerrainProvider({
+    url: Cesium.IonResource.fromAssetId(3956),
+    requestWaterMask: true,
+    requestVertexNormals: true
+  }),
+  Name: "CesiumTerrain",
+  OnView: true
+});
