@@ -69,7 +69,7 @@ export default {
       });
       const viewer = this.$store.state.viewer;
       if (this.type == "image") {
-        viewer.imageryLayers.add(this.dataSource.imageryLayer);
+        viewer.imageryLayers.add(this.dataSource.Layer);
       } else if (this.type == "vector") {
         viewer.dataSources.add(this.dataSource.DataSource);
       }
