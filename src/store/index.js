@@ -21,15 +21,45 @@ export default new Vuex.Store({
   },
   mutations: {
     addImage(state, imageDataSource) {
+      /* imageDataSource: {
+        Provider: Cesium.imageProvider,
+        Name: String,
+        Source: String,
+        OnView: Boolean,
+        Format: String
+      }*/
       state.dataCollection.image.push(imageDataSource);
     },
     addTerrain(state, terrainDataSource) {
+      /* terrainDataSource: {
+        Provider: Cesium.terrainProvider,
+        Name: String,
+        Source: String,
+        OnView: Boolean,
+        Format: String
+      }*/
       state.dataCollection.terrain.push(terrainDataSource);
     },
     addVector(state, vectorDataSource) {
+      /* vectorDataSource: {
+        Provider: Cesium.dataSource,
+        Name: String,
+        Source: String,
+        OnView: Boolean,
+        Format: String,
+        id: int
+      }*/
       state.dataCollection.vector.push(vectorDataSource);
     },
     addEntity(state, entityDataSource) {
+      /* entityDataSource: {
+        Provider: Cesium.dataSource,
+        Name: String,
+        Source: String,
+        OnView: Boolean,
+        Format: String,
+        id: int
+      }*/
       state.dataCollection.entity.push(entityDataSource);
     },
     initializeViewer(state, newViewer) {

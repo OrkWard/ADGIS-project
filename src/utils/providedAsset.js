@@ -12,7 +12,8 @@ imageDatas.push({
   }),
   Name: "google map",
   Source: "预置",
-  OnView: true
+  OnView: true,
+  Format: 'CesiumAsset'
 });
 
 imageDatas.push({

@@ -110,9 +110,46 @@ export default {
         .then(response => {
           response.data.forEach(function(data) {
             let dataSource;
-            let entity;
             // 分类别处理，先考虑矢量数据和3D数据
             switch (data["form"]) {
+              case 'image':
+                switch (data.name.split('.').pop()) {
+                  case 'tif': 
+                    // axios
+                    //   .put('api/image/publish/', { id: data.id })
+                    //   .then(response => {
+                    //     dataSource = new Cesium.WebMapServiceImageryProvider({
+                    //       url: response.data.url,
+                    //       layers: response.data.layer
+                    //     });
+                    //   })
+                    // this.$store.commit('addImage', {
+                    //   Provider: dataSource,
+                    //   Name: data.name,
+                    //   Source: '用户上传',
+                    //   OnView: false,
+                    //   Format: 'Tiff'
+                    // })
+                    break;
+                  case 'zip':
+                    // axios
+                    //   .put('api/vector/publish/', {id: data.id})
+                    //   .then(response => {
+                    //     dataSource = new Cesium.WebMapServiceImageryProvider({
+                    //       url: response.data.url,
+                    //       layers: response.data.layer
+                    //     });
+                    //   })
+                    // this.$store.commit('addImage', {
+                    //   Provider: dataSource,
+                    //   Name: data.name,
+                    //   Source: '用户上传',
+                    //   OnView: false,
+                    //   Format: 'shapefile'
+                    // })
+                    break;
+                }
+                break;
               case "vector":
                 // 数据格式
                 switch (data["name"].split(".").pop()) {
@@ -146,7 +183,7 @@ export default {
                 switch (data["name"].split(".").pop()) {
                   case "glb":
                     // 加载数据
-                    entity = new Cesium.Entity({
+                    dataSource = new Cesium.Entity({
                       name: `${data["name"].split(".")[0]}`,
                       model: {
                         show: true,
@@ -160,7 +197,7 @@ export default {
                 }
                 // 填入store
                 this.$store.commit("addEntity", {
-                  entity: entity,
+                  entity: dataSource,
                   Name: data["name"],
                   id: data["id"],
                   OnView: false
