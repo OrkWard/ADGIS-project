@@ -74,6 +74,7 @@ export default {
         type: this.type
       });
       if (["用户上传", "处理生成"].includes(this.dataSource.Source)) {
+        console.log("here");
         axios
           .delete(`api/data/${this.dataSource.id}/`)
           .then(response => {

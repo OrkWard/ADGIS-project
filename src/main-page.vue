@@ -112,26 +112,34 @@ export default {
             let dataSource;
             // 分类别处理，先考虑矢量数据和3D数据
             switch (data["form"]) {
-              case 'image':
-                switch (data.name.split('.').pop()) {
-                  case 'tif': 
-                    // axios
-                    //   .put('api/image/publish/', { id: data.id })
-                    //   .then(response => {
-                    //     dataSource = new Cesium.WebMapServiceImageryProvider({
-                    //       url: response.data.url,
-                    //       layers: response.data.layer
-                    //     });
-                    //   })
-                    // this.$store.commit('addImage', {
-                    //   Provider: dataSource,
-                    //   Name: data.name,
-                    //   Source: '用户上传',
-                    //   OnView: false,
-                    //   Format: 'Tiff'
-                    // })
+              case "image":
+                switch (data.name.split(".").pop()) {
+                  case "tif":
+                    axios
+                      .put("api/image/publish/", { id: data.id })
+                      .then(response => {
+                        dataSource = new Cesium.WebMapServiceImageryProvider({
+                          url: response.data.url,
+                          layers: response.data.layer,
+                          parameters: {
+                            service: "WMS",
+                            format: "image/png",
+                            transparent: true
+                          }
+                        });
+                        console.log(dataSource);
+                        viewer.imageryLayers.addImageryProvider(dataSource);
+                      });
+                    this.$store.commit("addImage", {
+                      Provider: dataSource,
+                      Name: data.name,
+                      Source: "用户上传",
+                      OnView: false,
+                      Format: "Tiff",
+                      id: data.id
+                    });
                     break;
-                  case 'zip':
+                  case "zip":
                     // axios
                     //   .put('api/vector/publish/', {id: data.id})
                     //   .then(response => {

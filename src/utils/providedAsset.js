@@ -13,7 +13,7 @@ imageDatas.push({
   Name: "google map",
   Source: "预置",
   OnView: true,
-  Format: 'CesiumAsset'
+  Format: "CesiumAsset"
 });
 
 imageDatas.push({
@@ -24,17 +24,6 @@ imageDatas.push({
     fileExtension: "png"
   }),
   Name: "OpenStreetMap",
-  Source: "预置",
-  OnView: true,
-  Format: "CesiumAsset"
-});
-
-imageDatas.push({
-  Provider: new Cesium.ArcGisMapServerImageryProvider({
-    url:
-      "https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer"
-  }),
-  Name: "ArcGISMap",
   Source: "预置",
   OnView: true,
   Format: "CesiumAsset"

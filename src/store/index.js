@@ -26,7 +26,8 @@ export default new Vuex.Store({
         Name: String,
         Source: String,
         OnView: Boolean,
-        Format: String
+        Format: String,
+        (optional)id: int
       }*/
       state.dataCollection.image.push(imageDataSource);
     },
