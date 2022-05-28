@@ -23,17 +23,24 @@
         {{ fileName }}
       </div>
       <div class="upload-button" @click="upload">upload</div>
+      <div class="upload-hint">
+        支持的文件类型<br />
+        Vector geojson<br />
+        &emsp;&emsp;&emsp;&thinsp;topojson<br />
+        &emsp;&emsp;&emsp;&thinsp;kml<br />
+        &emsp;&emsp;&emsp;&thinsp;czml<br />
+        &emsp;&emsp;&emsp;&thinsp;shp zipped in zip<br />
+        Raster tif<br />
+        &emsp;&emsp;&emsp;&thinsp;tiff<br />
+        Entity&thinsp;&thinsp; glb<br />
+        &emsp;&emsp;&emsp;&thinsp;gltf
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import Vue from "vue";
-import Element from "element-ui";
-import "element-ui/lib/theme-chalk/index.css";
-import addData from "../utils/addData.js";
-Vue.use(Element);
 
 export default {
   name: "Upload",
@@ -48,7 +55,6 @@ export default {
     },
     chooseFile() {
       this.$refs.fileInput.dispatchEvent(new MouseEvent("click"));
-      // this.fileName = document.querySelector("#file-to-upload").value;
     },
     upload() {
       let file = document.querySelector("#file-to-upload").files[0];
@@ -66,7 +72,8 @@ export default {
           ext == "geojson" ||
           ext == "topojson" ||
           ext == "kml" ||
-          ext == "czml"
+          ext == "czml" ||
+          ext == "zip"
         ) {
           formData.append("form", "vector");
           this.$message.success("加载矢量数据文件成功！");
@@ -110,7 +117,6 @@ export default {
   padding: 8px;
   width: fit-content;
   margin: 10px;
-  margin-top: 20px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -151,39 +157,15 @@ export default {
   background-color: var(--default-light-gray);
 }
 
-/* 
-.upload-file-selecter {
-  padding: 4px 10px;
-  height: 30px;
-  width: 80%;
-  line-height: 20px;
-  position: relative;
-  cursor: pointer;
-  color: #888;
-  background: #fafafa;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  overflow: hidden;
-  display: inline-block;
-  *display: none;
-  *zoom: 1
+/* 这个说明文字的样式我真的想不好怎么设好看） */
+.upload-hint {
+  font-size: 90%;
+  padding: 4px;
+  margin: 10px;
+  color: var(--default-gray);
+  line-height: 130%;
+  width: fit-content;
+  /* border: 1px solid var(--default-gray);
+  border-radius: 5px; */
 }
-
-.upload-file-selecter input {
-  position: absolute;
-  font-size: 100px;
-  right: 0;
-  top: 0;
-  opacity: 0;
-  filter: alpha(opacity=0);
-  cursor: pointer;
-  display: none;
-}
-
-.upload-file-selecter:hover {
-  color: #444;
-  background: #eee;
-  border-color: #ccc;
-  text-decoration: none
-} */
 </style>
