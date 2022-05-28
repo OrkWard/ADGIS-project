@@ -15,26 +15,11 @@
       <transition name="analysis-tool-container">
         <div v-if="showVector" class="analysis-tool-container">
           <analysis-tool id="analysis-vector-overlay" :toolname="'叠加分析'" />
-          <analysis-tool
-            id="analysis-vector-intersect"
-            :toolname="'相交分析'"
-          />
           <analysis-tool id="analysis-vector-crop" :toolname="'裁剪分析'" />
-          <analysis-tool id="analysis-vector-fusion" :toolname="'融合分析'" />
           <analysis-tool id="analysis-vector-joint" :toolname="'联合分析'" />
-          <analysis-tool id="analysis-vector-negate" :toolname="'交集取反'" />
-          <analysis-tool
-            id="analysis-vector-geometric"
-            :toolname="'几何分析'"
-          />
-          <analysis-tool id="analysis-vector-vertex" :toolname="'顶点提取'" />
           <analysis-tool
             id="analysis-vector-centerpoint"
             :toolname="'中心点提取'"
-          />
-          <analysis-tool
-            id="analysis-vector-convert"
-            :toolname="'点线面转化'"
           />
           <analysis-tool
             id="analysis-vector-reprojection"
@@ -59,10 +44,6 @@
         <div v-if="showRaster" class="analysis-tool-container">
           <analysis-tool id="analysis-raster-registration" :toolname="'配准'" />
           <analysis-tool id="analysis-raster-crop" :toolname="'裁剪'" />
-          <analysis-tool
-            id="analysis-raster-reprojection"
-            :toolname="'重投影'"
-          />
           <analysis-tool id="analysis-raster-resampling" :toolname="'重采样'" />
           <analysis-tool
             id="analysis-raster-calculator"

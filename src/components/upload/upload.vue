@@ -30,7 +30,7 @@
         &emsp;&emsp;&emsp;&thinsp;kml<br />
         &emsp;&emsp;&emsp;&thinsp;czml<br />
         &emsp;&emsp;&emsp;&thinsp;shp zipped in zip<br />
-        Raster  tif<br />
+        Raster tif<br />
         &emsp;&emsp;&emsp;&thinsp;tiff<br />
         Entity&thinsp;&thinsp; glb<br />
         &emsp;&emsp;&emsp;&thinsp;gltf
@@ -41,10 +41,6 @@
 
 <script>
 import axios from "axios";
-import Vue from "vue";
-import Element from "element-ui";
-import "element-ui/lib/theme-chalk/index.css";
-Vue.use(Element);
 
 export default {
   name: "Upload",
@@ -163,12 +159,12 @@ export default {
 }
 
 /* 这个说明文字的样式我真的想不好怎么设好看） */
-.upload-hint{
+.upload-hint {
   font-size: 90%;
   padding: 4px;
   margin: 10px;
   color: var(--default-gray);
-  line-height:130%;
+  line-height: 130%;
   width: fit-content;
   /* border: 1px solid var(--default-gray);
   border-radius: 5px; */
