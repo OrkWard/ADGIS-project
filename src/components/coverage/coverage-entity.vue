@@ -29,35 +29,37 @@
     <transition name="single-asset-manipulation">
       <div v-if="showSingleAsset" class="asset-manipulation-container">
         <div class="asset-manipulate" @click="show">
+          <!-- 对于四种类型的数据来说，沿用showCoverage这一个图标 -->
           <img
             class="asset-manipulate-icon"
             :src="require('../../assets/image/showCoverage.svg')"
           />
-          <div class="asset-manipulate-name" v-if="showIt">显示图层</div>
-          <div class="asset-manipulate-name" v-else>隐藏图层</div>
+          <div class="asset-manipulate-name" v-if="showIt">显示</div>
+          <div class="asset-manipulate-name" v-if="!showIt">隐藏</div>
         </div>
-        <div class="asset-manipulate">
+        <div class="asset-manipulate" @click="symbolization">
           <img
             class="asset-manipulate-icon"
-            :src="require('../../assets/image/up.svg')"
+            :src="require('../../assets/image/vector.svg')"
           />
-          <div class="asset-manipulate-name">上移图层</div>
-        </div>
-        <div class="asset-manipulate">
-          <img
-            class="asset-manipulate-icon"
-            :src="require('../../assets/image/down.svg')"
-          />
-          <div class="asset-manipulate-name">下移图层</div>
+          <div class="asset-manipulate-name" v-if="symbol">取消</div>
+          <div class="asset-manipulate-name" v-else>符号化设置</div>
         </div>
       </div>
     </transition>
+    <div v-if="symbol">
+      <coverage-symbol></coverage-symbol>
+    </div>
   </div>
 </template>
 
 <script>
+import coverageSymbol from "./coverage-symbol.vue";
 export default {
   props: ["dataSource", "index"],
+  components: {
+    coverageSymbol,
+  },
   methods: {
     toggleSingleAsset() {
       this.showSingleAsset = !this.showSingleAsset;
@@ -65,11 +67,15 @@ export default {
     show() {
       this.showIt = !this.showIt;
     },
+    symbolization() {
+      this.symbol = !this.symbol;
+    },
   },
   data() {
     return {
       showSingleAsset: false,
       showIt: true,
+      symbol: false,
     };
   },
 };
