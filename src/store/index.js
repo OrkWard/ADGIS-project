@@ -77,6 +77,12 @@ export default new Vuex.Store({
         targetData.dataSource
       );
       state.dataCollection[targetData.type][index].OnView = true;
+    },
+    OffView(state, targetData) {
+      let index = state.dataCollection[targetData.type].indexOf(
+        targetData.dataSource
+      );
+      state.dataCollection[targetData.type][index].OnView = false;
     }
   },
   actions: {},

@@ -28,14 +28,15 @@
     </div>
     <transition name="single-asset-manipulation">
       <div v-if="showSingleAsset" class="asset-manipulation-container">
-        <div class="asset-manipulate" @click="show">
+        <div class="asset-manipulate" @click="deleteLayer">
           <!-- 对于四种类型的数据来说，沿用showCoverage这一个图标 -->
           <img
             class="asset-manipulate-icon"
             :src="require('../../assets/image/showCoverage.svg')"
           />
-          <div class="asset-manipulate-name" v-if="showIt">显示</div>
-          <div class="asset-manipulate-name" v-else>隐藏</div>
+          <div class="asset-manipulate-name">
+            删除
+          </div>
         </div>
         <div class="asset-manipulate" @click="symbolization">
           <img
@@ -54,7 +55,6 @@
 </template>
 
 <script>
-// import vue from "vue";
 import coverageSymbol from "./coverage-symbol.vue";
 // function creater(props) {
 //   const symbolNode = new (vue.extend(coverageSymbol))({
@@ -72,12 +72,17 @@ export default {
     toggleSingleAsset() {
       this.showSingleAsset = !this.showSingleAsset;
     },
-    show() {
-      this.showIt = !this.showIt;
-    },
     symbolization() {
       this.symbol = !this.symbol;
       // creater(this.dataSource);
+    },
+    deleteLayer() {
+      const viewer = this.$store.state.viewer;
+      viewer.dataSources.remove(this.dataSource.DataSource);
+      this.$store.commit("OffView", {
+        type: "vector",
+        dataSource: this.dataSource
+      });
     }
   },
   data() {

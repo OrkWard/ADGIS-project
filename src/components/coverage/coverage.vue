@@ -66,8 +66,9 @@ export default {
               v-for="(dataSource, index) in dataCollection[type]"
               :key="index"
             >
-              <div class="coverage-between" />
+              <div v-if="dataSource.OnView" class="coverage-between" />
               <coverage-image
+                v-if="dataSource.OnView"
                 :dataSource="dataSource"
                 :index="index"
                 class="coverage-single"
@@ -93,8 +94,9 @@ export default {
               v-for="(dataSource, index) in dataCollection[type]"
               :key="index"
             >
-              <div class="coverage-between" />
+              <div v-if="dataSource.OnView" class="coverage-between" />
               <coverage-image
+                v-if="dataSource.OnView"
                 :dataSource="dataSource"
                 :index="index"
                 class="coverage-single"
@@ -120,8 +122,9 @@ export default {
               v-for="(dataSource, index) in dataCollection[type]"
               :key="index"
             >
-              <div class="coverage-between" />
+              <div v-if="dataSource.OnView" class="coverage-between" />
               <coverage-vector
+                v-if="dataSource.OnView"
                 :dataSource="dataSource"
                 :index="index"
                 class="coverage-single"
@@ -147,8 +150,9 @@ export default {
               v-for="(dataSource, index) in dataCollection[type]"
               :key="index"
             >
-              <div class="coverage-between" />
+              <div v-if="dataSource.OnView" class="coverage-between" />
               <coverage-entity
+                v-if="dataSource.OnView"
                 :dataSource="dataSource"
                 :index="index"
                 class="coverage-single"
